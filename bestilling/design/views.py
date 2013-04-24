@@ -12,6 +12,7 @@ from django.views.decorators.http import require_GET, require_POST
 
 class DesignForm(BaseFormView):
     template_name = 'design/form.html'
+    trello_board_id = '517870177cd0f3fa3e0036c7'
     params_list = [
         'client',
         'deadline',
@@ -59,7 +60,6 @@ Beskrivelse: {content}""".format(**params)
         deadline = datetime.strptime(params['deadline'], '%Y-%m-%d')
 
         card_id = self._save_to_trello(
-#            board_id = "",
             card_name = params['client'], 
             card_description = description, 
             card_due=datetime.strftime(deadline, '%m/%d/%y'),

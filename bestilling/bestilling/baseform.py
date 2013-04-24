@@ -8,6 +8,7 @@ import trello
 
 class BaseFormView(TemplateView):
     template_name = None
+    trello_board_id = None
     params_list = None
 
     def get(self, request):
@@ -41,10 +42,10 @@ class BaseFormView(TemplateView):
     def _save_data(self, params):
         raise NotImplementedError
 
-    def _save_to_trello(self, card_name, card_description, card_due, card_colour="green", board_id = "51784f4b1dd3f4c53e006fb4", list_name='Bestillinger'):
+    def _save_to_trello(self, card_name, card_description, card_due, card_colour="green", list_name='Bestillinger'):
         client = trello.TrelloClient(api_key=TRELLO_API_KEY, token=TRELLO_TOKEN)
 
-        board = client.get_board(board_id)
+        board = client.get_board(self.trello_board_id)
 
         all_lists = board.all_lists()
         order_list = filter(lambda x: x.name == list_name and (x.fetch() or x.closed == False), all_lists)
