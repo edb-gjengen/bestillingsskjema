@@ -1,3 +1,5 @@
+#-*- encoding: utf-8 -*-
+
 from datetime import datetime
 
 from bestilling.baseform import BaseFormView
@@ -44,9 +46,28 @@ class DesignForm(BaseFormView):
         return dict((error, True) for error, has_happened in errors.iteritems() if has_happened is True)
 
     def _save_data(self, params):
+        description = u"""\
+Forening: {client}
+Navn: {contact_name}
+Epost: {contact_email}
+Tlf: {contact_number}
+Format: {format}
+Papirstr.: {paper_size}
+Farger: {colour}
+Marger: {marger}
+Beskrivelse: {content}""".format(**params)
+        deadline = datetime.strptime(params['deadline'], '%Y-%m-%d')
+
+        card_id = self._save_to_trello(
+#            board_id = "",
+            card_name = params['client'], 
+            card_description = description, 
+            card_due=datetime.strftime(deadline, '%m/%d/%y'),
+        )
+
         order = DesignOrder(
                 client = params['client'],
-                deadline = datetime.strptime(params['deadline'], '%Y-%m-%d').date(),
+                deadline = deadline.date(),
                 contact_name = params['contact_name'],
                 contact_email = params['contact_email'],
                 contact_number = params['contact_number'],
@@ -55,5 +76,7 @@ class DesignForm(BaseFormView):
                 colour = params['colour'],
                 marger = params['marger'],
                 content = params['content'],
+                trello_card_id = str(card_id)
         ) 
         order.save()
+        return order

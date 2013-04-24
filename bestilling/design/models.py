@@ -12,3 +12,4 @@ class DesignOrder(models.Model):
     marger = models.CharField(max_length=50)
     content = models.TextField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
+    trello_card_id = models.CharField(max_length=40)
