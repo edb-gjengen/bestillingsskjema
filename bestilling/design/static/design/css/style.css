@@ -20,13 +20,6 @@ div.formitem
 	border-radius: 4px;
 }
 
-.error
-{
-	color:red;
-	font-style:italic;
-	padding-top:5px;
-}
-
 .form-horizontal .control-label {
 	width: 60px;
 }

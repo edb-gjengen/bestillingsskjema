@@ -30,7 +30,7 @@
 				<legend>Forening</legend>
 				<label>Hvem bestiller?</label>
 				{% if errors.client_error %}
-					<label class="error">Feltet er obligatorisk.</label>
+					<label class="text-error">Feltet er obligatorisk.</label>
 				{% endif %}
 				<input type="text" name="client" value="{{ client }}" />
 			</div>
@@ -53,7 +53,7 @@
 						<div class="controls">
 							<input type="text" name="contact_name" value="{{ contact_name }}" />
 							{% if errors.contact_name_error %}
-								<label class="error">Feltet er obligatorisk.</label>
+								<label class="text-error">Feltet er obligatorisk.</label>
 							{% endif %}
 						</div>
 					</div>
@@ -62,7 +62,7 @@
 						<div class="controls">
 							<input type="text" name="contact_email" value="{{ contact_email }}" />
 							{% if errors.contact_email_error %}
-								<label class="error">Feltet er obligatorisk.</label>
+								<label class="text-error">Feltet er obligatorisk.</label>
 							{% endif %}
 						</div>
 					</div>
@@ -71,7 +71,7 @@
 						<div class="controls">
 							<input type="text" name="contact_number" value="{{ contact_number }}" />
 							{% if errors.contact_number_error %}
-								<label class="error">Feltet er obligatorisk.</label>
+								<label class="text-error">Feltet er obligatorisk.</label>
 							{% endif %}
 						</div>
 					</div>
@@ -81,7 +81,7 @@
 			<div class="formitem">
 				<legend>Format</legend>
 				{% if errors.format_error %}
-					<label class="error">Feltet er obligatorisk.</label>
+					<label class="text-error">Feltet er obligatorisk.</label>
 				{% endif %}
 			
 				<label class="radio">
@@ -108,14 +108,14 @@
 				</label>
 				<input type="text" name="format_other" value="{{ format_other }}" style="margin-left:20px;" />
 				{% if errors.format_other_error %}
-					<label class="error">Feltet er obligatorisk hvis du velger "annet".</label>
+					<label class="text-error" style="margin-left:20px;">Feltet er obligatorisk hvis du velger "annet".</label>
 				{% endif %}
 			</div>
 			
 			<div class="formitem">
 				<legend>Størrelse</legend>
 				{% if errors.paper_size_error %}
-					<label class="error">Feltet er obligatorisk.</label>
+					<label class="text-error">Feltet er obligatorisk.</label>
 				{% endif %}
 			
 				<label class="radio">
@@ -137,7 +137,7 @@
 					<input name="paper_size" type="radio" value="other" {% if paper_size = 'other' %} checked="checked" {% endif %}>Annet:
 				</label>
 				{% if errors.paper_size_other_error %}
-					<label class="error">Feltet er obligatorisk hvis du velger "annet".</label>
+					<label class="text-error" style="margin-left:20px;">Feltet er obligatorisk hvis du velger "annet".</label>
 				{% endif %}
 				<input type="text" name="paper_size_other" value="{{ paper_size_other }}" style="margin-left:20px;" />
 			</div>
@@ -145,7 +145,7 @@
 			<div class="formitem">
 				<legend>Farger eller svart/hvitt</legend>
 				{% if errors.colour_error %}
-					<label class="error">Feltet er obligatorisk.</label>
+					<label class="text-error">Feltet er obligatorisk.</label>
 				{% endif %}
 				
 				<label class="radio">
@@ -159,7 +159,7 @@
 			<div class="formitem">
 				<legend>Profesjonell print eller skrive ut selv</legend>
 				{% if errors.marger_error %}
-					<label class="error">Feltet er obligatorisk.</label>
+					<label class="text-error">Feltet er obligatorisk.</label>
 				{% endif %}
 				
 				<label class="radio">
@@ -179,7 +179,7 @@
 					<p>Oppdragstaker er pliktet til å ta kontakt med oppdragsgiver så fort bestillingen er tildelt den.</p>
 				</div>
 				{% if errors.content_error %}
-					<label class="error">Feltet er obligatorisk.</label>
+					<label class="text-error">Feltet er obligatorisk.</label>
 				{% endif %}
 				<textarea name="content">{{ content }}</textarea>
 			</div>
