@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Kommunikasjonsavdelingen - Bestilling designoppdrag</title>
+		{% load staticfiles %}
+		<link type="text/css" href="{% static 'design/css/jquery.ui.css' %}" rel="stylesheet" />	
+		<link type="text/css" href="{% static 'design/css/jquery.ui.datepicker.css' %}" rel="stylesheet" />	
+		<link type="text/css" href="{% static 'design/css/style.css' %}" rel="stylesheet" />	
+		<script type="text/javascript" src="{% static 'design/js/jquery-2.0.0.js' %}"></script>
+		<script type="text/javascript" src="{% static 'design/js/jquery.ui.core.js' %}"></script>
+		<script type="text/javascript" src="{% static 'design/js/jquery.ui.datepicker.js' %}"></script>
+	</head>
+	<body class="center">
+
+		<script type="text/javascript">
+			$(document).ready(function(){
+			
+			  $("#deadline").datepicker({altField: '#deadline_field',
+			  						altFormat: 'yy-mm-dd',
+			  						minDate: '+2w',
+			  						defaultDate: new Date("{{ deadline }}") });
+//				$("#deadline_field").css("display", "none");
+			});
+		</script>
+		<h1>Kommunikasjonsavdelingen - Bestilling designoppdrag </h1>
+		
+		<form method="post" action="submit" method="post" id="bestilling">{% csrf_token %}
+		
+			<div class="formitem">
+				<h2 class="title">Forening</h2>
+				<div class="desc">Hvem bestiller?</div>
+				<input name="client" value="{{ client }}" />
+			</div>
+		
+			<div class="formitem">
+				<h2 class="title">Frist</h2>
+				<div class="desc">
+					<p>Fristen må være tidligst to uker etter bestilling.</p>
+					<p>Tidsfristen for oppdraget skal være forsvarlig i henhold til estimert arbeidsmengde. Dersom bestillingen er et hastoppdrag, må det gjerne presiseres, men Kommunikasjonsavdelingen kan ikke garantere at bestillingen prioriteres fremfor øvrige oppdrag.</p>
+				</div>
+				<input id = "deadline_field" value="" name="deadline" />
+				<div id="deadline"></div>
+			</div>
+			<div class="formitem">
+				<h2 class="title">Kontaktperson</h2>
+			
+				<table>
+					<tr>
+						<td><label for="contact_name">Navn:</label></td>
+						<td><input name="contact_name" value="{{ contact_name }}" /></td>
+					</tr>
+					<tr>
+						<td><label for="contact_email">Email:</label></td>
+						<td><input name="contact_email" value="{{ contact_email }}" /></td>
+					</tr>
+					<tr>
+						<td><label for="contact_number">Tlf.:</label></td>
+						<td><input name="contact_number" value="{{ contact_number }}" /></td>
+					</tr>
+				</table>
+			</div>
+		
+			<div class="formitem">
+				<h2 class="title">Format</h2>
+			
+				<ul>
+					<li>
+						<input name="format" type="radio" value="Trykk - Flyer" {% if format = 'Trykk - Flyer' %} checked="checked" {% endif %}>Trykk - Flyer</input>
+					</li>
+					<li>
+						<input name="format" type="radio" value="Trykk - Plakat" {% if format = 'Trykk - Plakat' %} checked="checked" {% endif %}>Trykk - Plakat</input>
+					</li>
+					<li>
+						<input name="format" type="radio" value="Trykk - Banner" {% if format = 'Trykk - Banner' %} checked="checked" {% endif %}>Trykk - Banner</input>
+					</li>
+					<li>
+						<input name="format" type="radio" value="Web - Annonse" {% if format = 'Web - Annonse' %} checked="checked" {% endif %}>Web - Annonse</input>
+					</li>
+					<li>
+						<input name="format" type="radio" value="Web - Banner" {% if format = 'Web - Banner' %} checked="checked" {% endif %}>Web - Banner</input>
+					</li>
+					<li>
+						<input name="format" type="radio" value="Web - Bilde" {% if format = 'Web - Bilde' %} checked="checked" {% endif %}>Web - Bilde</input>
+					</li>
+					<li>
+						<input name="format" type="radio" value="other" {% if format = 'other' %} checked="checked" {% endif %}>annet : 
+							<input name="format_other" value="{{ format_other }}" />
+						</input>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="formitem">
+				<h2 class="title">Størrelse</h2>
+				<ul>
+					<li>
+						<input name="paper_size" type="radio" value="A2" {% if paper_size = 'A2' %} checked="checked" {% endif %}>A2</input>
+					</li>
+					<li>
+						<input name="paper_size" type="radio" value="A3" {% if paper_size = 'A3' %} checked="checked" {% endif %}>A3</input>
+					</li>
+					<li>
+						<input name="paper_size" type="radio" value="A4" {% if paper_size = 'A4' %} checked="checked" {% endif %}>A4</input>
+					</li>
+					<li>
+						<input name="paper_size" type="radio" value="A5" {% if paper_size = 'A5' %} checked="checked" {% endif %}>A5</input>
+					</li>
+					<li>
+						<input name="paper_size" type="radio" value="A6" {% if paper_size = 'A6' %} checked="checked" {% endif %}>A6</input>
+					</li>
+					<li>
+						<input name="paper_size" type="radio" value="other" {% if paper_size = 'other' %} checked="checked" {% endif %}>annet : 
+							<input name="paper_size_other" value="{{ paper_size_other }}" />
+						</input>
+					</li>
+				</ul>
+			</div>
+		
+			<div class="formitem">
+				<h2 class="title">Farger eller svart/hvitt</h2>
+				<ul>
+					<li>
+						<input name="colour" type="radio" value="Farge" {% if colour = 'Farge' %} checked="checked" {% endif %}>Farge</input>
+					</li>
+					<li>
+						<input name="colour" type="radio" value="Svart/hvitt" {% if colour = 'Svart/hvitt' %} checked="checked" {% endif %}>Svart/hvitt</input>
+					</li>
+				</ul>
+			</div>
+		
+			<div class="formitem">
+				<h2 class="title">Profesjonell print eller skrive ut selv</h2>
+				<ul>
+					<li>
+						<input name="marger" type="radio" value="Jeg skal sende dette til et trykkeri" {% if marger = 'Jeg skal sende dette til et trykkeri' %} checked="checked" {% endif %}>Jeg skal sende dette til et trykkeri</input>
+					</li>
+					<li>
+						<input name="marger" type="radio" value="Jeg skal skrive ut dette på min egen printer" {% if marger = 'Jeg skal skrive ut dette på min egen printer' %} checked="checked" {% endif %}>Jeg skal skrive ut dette på min egen printer</input>
+					</li>
+				</ul>
+			</div>
+		
+			<div class="formitem">
+				<h2 class="title">Innhold</h2>
+				<div class="desc">
+					<p>Hvem, hva, hvor og når</p>
+					<p>Oppdragsgiver er pliktet til å forsyne oppdragstaker med tilstrekkelig og korrekt informasjon. Det er heller ikke oppdragstakers oppgave å sørge for at oppgitt informasjon/data er korrekt, og er følgelig fraskrevet alt ansvar dersom informasjonen er ukorrekt.</p>
+					<p>Bestillingen skal inneha en klar og tydelig formulering.</p>
+					<p>Oppdragstaker er pliktet til å ta kontakt med oppdragsgiver så fort bestillingen er tildelt den.</p>
+				</div>
+				<textarea name="content">{{ content }}</textarea>
+			</div>
+			<div class="submit">
+							
+				<input type="submit" value="Send bestilling" name="bestill" />
+			</div>
+		</form>
+	</body>
+</html>

@@ -1,0 +1,54 @@
+.title
+{
+	margin:0px;
+}
+.desc
+{
+	font-style:italic;
+	color:gray;
+}
+ul
+{
+	list-style:none;
+	padding:0px;
+}
+body.center
+{
+	margin:auto;
+	width:800px;
+}
+
+textarea
+{
+	width:99%;
+	height:250px;
+}
+
+div.formitem
+{
+	padding:10px;
+	margin:5px;
+	border:1px solid gray;
+}
+
+.error
+{
+	color:red;
+	font-style:italic;
+	padding-top:5px;
+}
+
+tr.alt td, tr.alt th
+{
+	background-color:rgb(200,200,200);
+}
+
+tr.warning td
+{
+	background-color:yellow;
+}
+
+tr.critical td
+{
+	background-color:red;
+}
