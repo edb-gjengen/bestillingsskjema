@@ -1,9 +1,12 @@
+from datetime import datetime
+
+from bestilling.baseform import BaseFormView
+from design.models import DesignOrder
 from django.core.context_processors import csrf
 from django.http import HttpResponse, Http404
 from django.template import Context, Template
 from django.template.loader import get_template
 from django.views.decorators.http import require_GET, require_POST
-from bestilling.baseform import BaseFormView
 
 class DesignForm(BaseFormView):
     template_name = 'design/form.html'
@@ -40,3 +43,17 @@ class DesignForm(BaseFormView):
     
         return dict((error, True) for error, has_happened in errors.iteritems() if has_happened is True)
 
+    def _save_data(self, params):
+        order = DesignOrder(
+                client = params['client'],
+                deadline = datetime.strptime(params['deadline'], '%Y-%m-%d').date(),
+                contact_name = params['contact_name'],
+                contact_email = params['contact_email'],
+                contact_number = params['contact_number'],
+                format_type = params['format'] if params['format'] != 'other' else params['format_other'],
+                paper_size = params['paper_size'] if params['paper_size'] != 'other' else params['paper_size_other'],
+                colour = params['colour'],
+                marger = params['marger'],
+                content = params['content'],
+        ) 
+        order.save()

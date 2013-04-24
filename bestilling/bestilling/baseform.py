@@ -30,7 +30,11 @@ class BaseFormView(TemplateView):
             response = template.render(Context(context_data))
             return HttpResponse(response)
 
+        self._save_data(params)
         return HttpResponse('<html><head><title>Suksess!</title></head><body><p>Bestillingen har blitt sendt.</p></body></html>')
 
     def _get_errors(self, params):
         return {}
+
+    def _save_data(self, params):
+        raise NotImplementedError
