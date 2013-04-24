@@ -1,3 +1,4 @@
 venv
 *.pyc
+*.swp
 bestilling/bestilling/settings.py
