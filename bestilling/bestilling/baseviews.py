@@ -1,6 +1,7 @@
+from datetime import datetime, timedelta
 from django.core.context_processors import csrf
 from django.http import HttpResponse, Http404
-from django.template import Context, Template
+from django.template import Context
 from django.template.loader import get_template
 from django.views.generic import TemplateView
 from settings import TRELLO_API_KEY, TRELLO_TOKEN
@@ -62,3 +63,64 @@ class BaseFormView(TemplateView):
         # Set colour of the card. We have to do this like this, because there is no shortcut and _set_remote_attribute() uses PUT
         card.client.fetch_json('/cards/'+card.id+'/labels', http_method="POST", post_args = { 'value' : card_colour })
         return card.id
+
+
+class BaseOrderView(TemplateView):
+    template_name = None
+
+    def get(self, request, order_id):
+        template = get_template(self.template_name)
+        order = self._get_order(order_id)
+        data = self._get_additional_data(order)
+
+        context_data = {
+            'order' : order,
+            'data' : data,
+        }
+    
+        response = template.render(Context(context_data))
+        return HttpResponse(response)
+
+    def _get_order(self, order_id):
+        raise NotImplementedError
+
+    def _get_additional_data(self, order):
+        raise NotImplementedError
+
+    def _get_from_trello(self, card_id):
+        client = trello.TrelloClient(api_key=TRELLO_API_KEY, token=TRELLO_TOKEN)
+
+        obj = client.fetch_json('/cards/' + card_id)
+
+        class MockObject(object):
+            pass
+        tmp_list = MockObject()
+        tmp_list.client = client
+
+        card = trello.Card(
+            card_id = obj['id'],
+            trello_list = tmp_list,
+            name = obj['name']
+        )
+        return card
+
+    def _get_data_from_card(self, card):
+        now = datetime.now()
+        due =  datetime.strptime(card.badges['due'][:-5], "%Y-%m-%dT%H:%M:%S")
+        days_left = due - now if due > now else timedelta(0)
+
+        return {
+            "card" : card,
+            "created" : card.create_date,
+            "due" : due,
+            "days_left" : days_left.days,
+            "members" : self._list_members_from_card(card),
+        }
+
+    def _list_members_from_card(self, card):
+        client = trello.TrelloClient(api_key=TRELLO_API_KEY, token=TRELLO_TOKEN)
+        
+        if not hasattr(card, "member_ids"):
+            card.fetch()
+
+        return map(lambda member_id: client.get_member(member_id).fetch(), card.member_ids)

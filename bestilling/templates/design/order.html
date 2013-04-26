@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Kommunikasjonsavdelingen - Designoppdrag nr {{ order.id }}</title>
+		{% load staticfiles %}
+		<link type="text/css" href="{% static 'css/jquery.ui.css' %}" rel="stylesheet" />	
+		<link type="text/css" href="{% static 'css/jquery.ui.datepicker.css' %}" rel="stylesheet" />	
+		<link type="text/css" href="{% static 'css/bootstrap.css' %}" rel="stylesheet" />	
+		<link type="text/css" href="{% static 'css/bootstrap-responsive.css' %}" rel="stylesheet" />	
+		<link type="text/css" href="{% static 'css/design/style.css' %}" rel="stylesheet" />	
+		<script type="text/javascript" src="{% static 'js/jquery-2.0.0.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.ui.core.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.ui.datepicker.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+	</head>
+	<body class="center">
+		<h1>Bestilling fra {{ order.client }}</h1>
+
+		<table class="table table-bordered">
+			<tr>
+				<td><strong>Hvem</strong></td>
+				<td>{{ order.client }}</td>
+			</tr>
+			<tr>
+				<td><strong>Bestilt</strong></td>
+				<td>{{data.created|date:"d. E Y" }}</td>
+			</tr>
+			<tr>
+				<td><strong>Frist</strong></td>
+				<td>{{ data.due|date:"d. E Y" }}</td>
+			</tr>
+			<tr>
+				<td><strong>Dager igjen</strong></td>
+				<td>{{ data.days_left }}</td>
+			</tr>
+			<tr>
+				<td><strong>Kontaktperson</strong></td>
+				<td>{{ order.contact_name }}</td>
+			</tr>
+			<tr>
+				<td><strong>Epost</strong></td>
+				<td>{{ order.contact_email }}</td>
+			</tr>
+			<tr>
+				<td><strong>Telefon</strong></td>
+				<td>{{ order.contact_number|default:"--" }}</td>
+			</tr>
+			<tr>
+				<td><strong>Tildelt</strong></td>
+				<td>
+					<ul>
+						{% for member in data.members %}
+							<li>{{ member.full_name }}</li>
+						{% empty %}
+							<li>---</li>
+						{% endfor %}
+					</ul>
+				</td>
+			</tr>
+		</table>
+	
+		<p>{{ order.content }}</p>
+	</body>
+</html>

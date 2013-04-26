@@ -2,7 +2,7 @@
 
 from datetime import datetime
 
-from bestilling.baseform import BaseFormView
+from bestilling.baseviews import BaseFormView, BaseOrderView
 from design.models import DesignOrder
 from django.core.context_processors import csrf
 from django.http import HttpResponse, Http404
@@ -10,7 +10,7 @@ from django.template import Context, Template
 from django.template.loader import get_template
 from django.views.decorators.http import require_GET, require_POST
 
-class DesignForm(BaseFormView):
+class DesignFormView(BaseFormView):
     template_name = 'design/form.html'
     trello_board_id = '517870177cd0f3fa3e0036c7'
     params_list = [
@@ -80,3 +80,19 @@ Beskrivelse: {content}""".format(**params)
         ) 
         order.save()
         return order
+
+class DesignOrderView(BaseOrderView):
+    template_name = "design/order.html"
+
+    def _get_order(self, order_id):
+        try:
+            order = DesignOrder.objects.get(pk=order_id)
+            return order
+        except DesignOrder.DoesNotExist:
+            raise Http404
+
+    def _get_additional_data(self, order):
+        card = self._get_from_trello(order.trello_card_id)
+        card.fetch()
+        return self._get_data_from_card(card)
+        
