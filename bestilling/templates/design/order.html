@@ -17,29 +17,34 @@
 		<h1 class="text-center" style="margin:30px;">Bestilling fra {{ order.client }}</h1>
 
 		<table class="table table-bordered">
+			<caption>Kontaktperson</caption>
 			<tr>
-				<th style="width:50%;">Hvem</th>
-				<td style="width:50%;">{{ order.client }}</td>
+				<th style="width:50%;">Navn</th>
+				<td style="width:50%;">{{ order.contact_name }} {% if order.contact_email %}(<a href="mailto:{{ order.contact_email }}">{{ order.contact_email }}</a>){% endif %}</td>
 			</tr>
 			<tr>
-				<th>Kontaktperson</th>
-				<td>{{ order.contact_name }} {% if order.contact_email %}(<a href="mailto:{{ order.contact_email }}">{{ order.contact_email }}</a>){% endif %}</td>
+				<th>Telefon</th>
+				<td>{{ order.contact_number|default:"--" }}</td>
 			</tr>
 			<tr>
 				<th>Bestillingsdato</th>
 				<td>{{data.created|date:"d. E Y" }}</td>
 			</tr>
-			<tr>
-				<th>Frist</th>
-				<td>{{ data.due|date:"d. E Y" }}</td>
-			</tr>
-			<tr>
-				<th>Dager igjen</th>
-				<td>{{ data.days_left|default:"" }}</td>
-			</tr>
-			<tr>
-				<th>Telefon</th>
-				<td>{{ order.contact_number|default:"--" }}</td>
+		</table>
+		<table class="table table-bordered">
+			<caption>Status</caption>
+			<tr class="
+				{% if data.card.closed %}
+					error
+				{% else %}
+					{% if data.members %}
+						success
+					{% else %}
+						info
+					{% endif %}
+				{% endif %}">
+				<th style="width:50%;">Status</th>
+				<td style="width:50%;">{% if data.card.closed %}Lukket{% else %}&Aring;pen{% endif %}</td>
 			</tr>
 			<tr>
 				<th>Tildelt</th>
@@ -54,6 +59,10 @@
 					Ingen
 					{% endif %}
 				</td>
+			</tr>
+			<tr>
+				<th>Frist</th>
+				<td>{{ data.due|date:"d. E Y" }} {% if data.days_left %}({{ data.days_left|default:"" }} dager igjen){% endif %}</td>
 			</tr>
 		</table>
 	
