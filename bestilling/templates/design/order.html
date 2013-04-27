@@ -14,51 +14,68 @@
 		<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
 	</head>
 	<body class="center">
-		<h1>Bestilling fra {{ order.client }}</h1>
+		<h1 class="text-center" style="margin:30px;">Bestilling fra {{ order.client }}</h1>
 
 		<table class="table table-bordered">
 			<tr>
-				<td><strong>Hvem</strong></td>
-				<td>{{ order.client }}</td>
+				<th style="width:50%;">Hvem</th>
+				<td style="width:50%;">{{ order.client }}</td>
 			</tr>
 			<tr>
-				<td><strong>Bestilt</strong></td>
+				<th>Kontaktperson</th>
+				<td>{{ order.contact_name }} {% if order.contact_email %}(<a href="mailto:{{ order.contact_email }}">{{ order.contact_email }}</a>){% endif %}</td>
+			</tr>
+			<tr>
+				<th>Bestillingsdato</th>
 				<td>{{data.created|date:"d. E Y" }}</td>
 			</tr>
 			<tr>
-				<td><strong>Frist</strong></td>
+				<th>Frist</th>
 				<td>{{ data.due|date:"d. E Y" }}</td>
 			</tr>
 			<tr>
-				<td><strong>Dager igjen</strong></td>
-				<td>{{ data.days_left }}</td>
+				<th>Dager igjen</th>
+				<td>{{ data.days_left|default:"" }}</td>
 			</tr>
 			<tr>
-				<td><strong>Kontaktperson</strong></td>
-				<td>{{ order.contact_name }}</td>
-			</tr>
-			<tr>
-				<td><strong>Epost</strong></td>
-				<td>{{ order.contact_email }}</td>
-			</tr>
-			<tr>
-				<td><strong>Telefon</strong></td>
+				<th>Telefon</th>
 				<td>{{ order.contact_number|default:"--" }}</td>
 			</tr>
 			<tr>
-				<td><strong>Tildelt</strong></td>
+				<th>Tildelt</th>
 				<td>
-					<ul>
+					{% if data.members %}
+					<ul style="margin: 0 0 0 25px;">
 						{% for member in data.members %}
 							<li>{{ member.full_name }}</li>
-						{% empty %}
-							<li>---</li>
 						{% endfor %}
 					</ul>
+					{% else %}
+					Ingen
+					{% endif %}
 				</td>
 			</tr>
 		</table>
 	
-		<p>{{ order.content }}</p>
+		<pre>{{ order.content }}</pre>
+
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th style="width:25%;">Format</th>
+					<th style="width:25%;">Ark st&oslash;rrelse</th>
+					<th style="width:25%;">Farger</th>
+					<th style="width:25%;">Marger</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>{{ order.format_type }}</td>
+					<td>{{ order.paper_size }}</td>
+					<td>{{ order.colour }}</td>
+					<td>{{ order.marger }}</td>
+				</tr>
+			</tbody>
+		</table>
 	</body>
 </html>

@@ -108,15 +108,18 @@ class BaseOrderView(TemplateView):
         return card
 
     def _get_data_from_card(self, card):
-        now = datetime.now()
-        due =  datetime.strptime(card.badges['due'][:-5], "%Y-%m-%dT%H:%M:%S")
-        days_left = due - now if due > now else timedelta(0)
+        due = None
+        days_left = None
+        if card.badges['due'] is not None:
+            now = datetime.now()
+            due =  datetime.strptime(card.badges['due'][:-5], "%Y-%m-%dT%H:%M:%S")
+            days_left = (due - now).days if due > now else timedelta(0).days
 
         return {
             "card" : card,
             "created" : card.create_date,
             "due" : due,
-            "days_left" : days_left.days,
+            "days_left" : days_left,
             "members" : self._list_members_from_card(card),
         }
 
