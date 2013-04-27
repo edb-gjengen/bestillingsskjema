@@ -69,9 +69,12 @@ class BaseOrderView(TemplateView):
     template_name = None
 
     def get(self, request, order_id):
-        template = get_template(self.template_name)
-        order = self._get_order(order_id)
-        data = self._get_additional_data(order)
+        try:
+            template = get_template(self.template_name)
+            order = self._get_order(order_id)
+            data = self._get_additional_data(order)
+        except trello.ResourceUnavailable:
+            raise Http404
 
         context_data = {
             'order' : order,
