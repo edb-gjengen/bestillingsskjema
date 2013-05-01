@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from django.core.context_processors import csrf
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, Http404
 from django.template import Context
 from django.template.loader import get_template
@@ -38,7 +39,13 @@ class BaseFormView(TemplateView):
         return HttpResponse('<html><head><title>Suksess!</title></head><body><p>Bestillingen har blitt sendt.<br/>card_id = {}</p></body></html>'.format(order.id))
 
     def _get_errors(self, params):
-        return {}
+        return {
+            'client_error' : params['client'] == '',
+            'deadline_error' : params['deadline'] == '',
+            'contact_name_error' : params['contact_name'] == '',
+            'contact_email_error' : params['contact_email'] == '',
+            'contact_number_error' : False,
+        }
 
     def _save_data(self, params):
         raise NotImplementedError
@@ -73,7 +80,7 @@ class BaseOrderView(TemplateView):
             template = get_template(self.template_name)
             order = self._get_order(order_id)
             data = self._get_additional_data(order)
-        except trello.ResourceUnavailable:
+        except (trello.ResourceUnavailable, ObjectDoesNotExist) as exception:
             raise Http404
 
         context_data = {

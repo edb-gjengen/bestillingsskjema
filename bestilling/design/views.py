@@ -7,8 +7,6 @@ from design.models import DesignOrder
 from django.core.context_processors import csrf
 from django.http import HttpResponse, Http404
 from django.template import Context, Template
-from django.template.loader import get_template
-from django.views.decorators.http import require_GET, require_POST
 
 class DesignFormView(BaseFormView):
     template_name = 'design/form.html'
@@ -29,12 +27,8 @@ class DesignFormView(BaseFormView):
     ]
 
     def _get_errors(self, params):
-        errors = {
-            'client_error' : params['client'] == '',
-            'deadline_error' : params['deadline'] == '',
-            'contact_name_error' : params['contact_name'] == '',
-            'contact_email_error' : params['contact_email'] == '',
-            'contact_number_error' : False,
+        errors = super(DesignFormView, self)._get_errors(params)
+        errors.update({
             'format_error' : params['format'] == '',
             'format_other_error' : params['format'] == 'other' and params['format_other'] == '',
             'paper_size_error' : params['paper_size'] == '',
@@ -42,8 +36,9 @@ class DesignFormView(BaseFormView):
             'colour_error' : params['colour'] == '',
             'marger_error' : params['marger'] == '',
             'content_error' : False,
-        }
+        })
     
+        # Filter out all errors that are False:
         return dict((error, True) for error, has_happened in errors.iteritems() if has_happened is True)
 
     def _save_data(self, params):
@@ -89,9 +84,5 @@ class DesignOrderView(BaseOrderView):
     template_name = "design/order.html"
 
     def _get_order(self, order_id):
-        try:
-            order = DesignOrder.objects.get(pk=order_id)
-            return order
-        except DesignOrder.DoesNotExist:
-            raise Http404
+        return DesignOrder.objects.get(pk=order_id)
 
