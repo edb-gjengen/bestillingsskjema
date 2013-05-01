@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Kommunikasjonsavdelingen Bestill oppdrag</title>
+		{% load staticfiles %}
+		<link type="text/css" href="{% static 'css/jquery.ui.css' %}" rel="stylesheet" />	
+		<link type="text/css" href="{% static 'css/jquery.ui.datepicker.css' %}" rel="stylesheet" />	
+		<link type="text/css" href="{% static 'css/bootstrap.css' %}" rel="stylesheet" />	
+		<link type="text/css" href="{% static 'css/bootstrap-responsive.css' %}" rel="stylesheet" />	
+		<link type="text/css" href="{% static 'css/design/style.css' %}" rel="stylesheet" />	
+		<script type="text/javascript" src="{% static 'js/jquery-2.0.0.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.ui.core.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.ui.datepicker.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+		<style>
+			body {
+				padding: 15px;
+			}
+
+			li {
+				margin-bottom: 5px;
+			}
+
+			li a {
+				font-size: 1.2em;
+			}
+		</style>
+	</head>
+	<body>
+		<h3>Den bedste bestilling blir gjort p&aring; <a href='http://bestilling.studentersamfundet.no'>bestilling</a>.</h3>
+		
+		<ul>
+			<li><a href='design'>Design</a></li>
+			<li><a href='tekst'>Tekst</a></li>
+			<li><a href='prm'>PRM</a></li>
+		</ul>
+	</body>
+</html>
