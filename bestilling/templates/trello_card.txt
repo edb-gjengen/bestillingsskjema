@@ -3,15 +3,21 @@
 **Epost:** {{ contact_email }}
 **Tlf:** {{ contact_number}}
 ---
+{%	if format_type %}**Format:** {{ format_type }}\n{% endif %}
+{%	if paper_size %}**Papirstr.:** {{ paper_size }}{% endif %}
+{%	if colour %}**Farger:** {{ colour}}{% endif %}
+{%	if marger %}**Marger:** {{ marger}}{% endif %}
 {% 	if text_type %}**Type tekst:** {{ text_type }}{% endif %}
 {% 	if length %}**Lengde:** {{ length }}{% endif %}
 {% 	if image %}**Bilde:** {{ image }}{% endif %}
----
-{% 	if interview_name or interview_contact %}**Intervju:**
+{% 	if interview_name or interview_contact %}---
+**Intervju:**
 {% 		if interview_name %}**Navn:** {{ interview_name }}{% endif %}
 {%		if interview_contact %}**Kontaktinfo:** {{ interview_contact }}{% endif %}
 {% 	endif %}
----
-{% if content %}**Tillegsinformasjon:**
+{% if content %}---
+**Tillegsinformasjon:**
 {{ content }}
 {% endif %}
+---
+{{ url }}

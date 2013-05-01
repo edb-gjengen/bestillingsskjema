@@ -37,7 +37,7 @@ class BaseFormView(TemplateView):
             response = template.render(Context(context_data))
             return HttpResponse(response)
 
-        order = self._save_data(params)
+        order = self._save_data(request, params)
         template = get_template('form_success.html')
         context_data = {
             'url' : self._get_order_url(request, order),
@@ -57,7 +57,7 @@ class BaseFormView(TemplateView):
     def _get_order_url(self, request, order):
         raise NotImplementedError
 
-    def _save_data(self, params):
+    def _save_data(self, request, params):
         raise NotImplementedError
 
     def _save_to_trello(self, card_name, card_description, card_due, card_colour="green", list_name='Bestillinger'):
@@ -79,8 +79,7 @@ class BaseFormView(TemplateView):
 
         # Set colour of the card. We have to do this like this, because there is no shortcut and _set_remote_attribute() uses PUT
         card.client.fetch_json('/cards/'+card.id+'/labels', http_method="POST", post_args = { 'value' : card_colour })
-        return card.id
-
+        return card
 
 class BaseOrderView(TemplateView):
     template_name = None

@@ -43,21 +43,20 @@ class TekstFormView(BaseFormView):
     def _get_order_url(self, request, order):
         return request.build_absolute_uri('/tekst/order/{uuid}/'.format(uuid=order.uuid))
 
-    def _save_data(self, params):
+    def _save_data(self, request, params):
         params.update({
         'text_type' : params['text_type'] if params['text_type'] != 'other' else params['text_type_other'],
         })
 
-        card_template = get_template('trello_card.txt')
-        description = card_template.render(Context(params))
-
         deadline = datetime.strptime(params['deadline'], '%Y-%m-%d')
 
-        card_id = self._save_to_trello(
+        card = self._save_to_trello(
             card_name = params['client'], 
-            card_description = description, 
+            card_description = "", 
             card_due=datetime.strftime(deadline, '%m/%d/%y'),
         )
+
+        card_id = card.id
 
         order = TekstOrder(
                 client = params['client'],
@@ -74,6 +73,12 @@ class TekstFormView(BaseFormView):
                 trello_card_id = str(card_id)
         ) 
         order.save()
+        
+        params['url'] = request.build_absolute_uri('/tekst/order/{uuid}/'.format(uuid=order.uuid))
+        card_template = get_template('trello_card.txt')
+        description = card_template.render(Context(params))
+        card.set_description(description)
+
         return order
 
 class TekstOrderView(BaseOrderView):
