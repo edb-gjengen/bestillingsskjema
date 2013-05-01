@@ -8,6 +8,8 @@ from django.views.generic import TemplateView
 from settings import TRELLO_API_KEY, TRELLO_TOKEN
 from lib import trello
 
+import utils
+
 class BaseFormView(TemplateView):
     template_name = None
     trello_board_id = None
@@ -48,8 +50,8 @@ class BaseFormView(TemplateView):
             'client_error' : params['client'] == '',
             'deadline_error' : params['deadline'] == '',
             'contact_name_error' : params['contact_name'] == '',
-            'contact_email_error' : params['contact_email'] == '',
-            'contact_number_error' : False,
+            'contact_email_error' : not utils.is_email_valid(params['contact_email']),
+            'contact_number_error' : not utils.is_phone_valid(params['contact_number']),
         }
 
     def _get_order_url(self, request, order):

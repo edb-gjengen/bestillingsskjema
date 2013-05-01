@@ -29,10 +29,10 @@
 			<div class="formitem">
 				<legend>Forening</legend>
 				<label>Hvem bestiller?</label>
+				<input type="text" name="client" value="{{ client }}" />
 				{% if errors.client_error %}
 					<label class="text-error">Feltet er obligatorisk.</label>
 				{% endif %}
-				<input type="text" name="client" value="{{ client }}" />
 			</div>
 		
 			<div class="formitem">
@@ -62,7 +62,7 @@
 						<div class="controls">
 							<input type="text" name="contact_email" value="{{ contact_email }}" />
 							{% if errors.contact_email_error %}
-								<label class="text-error">Feltet er obligatorisk.</label>
+								<label class="text-error">Skriv inn gyldig epost-adresse.</label>
 							{% endif %}
 						</div>
 					</div>
@@ -71,7 +71,7 @@
 						<div class="controls">
 							<input type="text" name="contact_number" value="{{ contact_number }}" />
 							{% if errors.contact_number_error %}
-								<label class="text-error">Feltet er obligatorisk.</label>
+								<label class="text-error">Skriv inn gyldig telefonnummer.</label>
 							{% endif %}
 						</div>
 					</div>
