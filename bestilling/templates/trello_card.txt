@@ -16,7 +16,7 @@
 {%		if interview_contact %}**Kontaktinfo:** {{ interview_contact }}{% endif %}
 {% 	endif %}
 {% if content %}---
-**Tillegsinformasjon:**
+**Tilleggsinformasjon:**
 {{ content }}
 {% endif %}
 ---
