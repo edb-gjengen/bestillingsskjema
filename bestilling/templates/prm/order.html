@@ -1,0 +1,8 @@
+{% extends "order_base.html" %}
+
+{% block title %}Kommunikasjonsavdelingen - PRM-oppdrag nr {{ order.id }}{% endblock %}
+
+{% block order_details %}
+<p><strong>Oppdrag: </strong>{{ order.assignment_type }}</p>
+<pre>{{ order.content }}</pre>
+{% endblock %}

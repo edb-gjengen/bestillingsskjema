@@ -10,6 +10,7 @@
 {% 	if text_type %}**Type tekst:** {{ text_type }}{% endif %}
 {% 	if length %}**Lengde:** {{ length }}{% endif %}
 {% 	if image %}**Bilde:** {{ image }}{% endif %}
+{%  if assignment_type %}** Type oppdrag: ** {{ assignment_type }}{% endif %}
 {% 	if interview_name or interview_contact %}---
 **Intervju:**
 {% 		if interview_name %}**Navn:** {{ interview_name }}{% endif %}
