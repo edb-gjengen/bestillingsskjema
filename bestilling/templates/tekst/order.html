@@ -22,5 +22,5 @@
 		</tr>
 	</tbody>
 </table>
-<pre>{{ order.content }}</pre>
+{% if order.content %}<pre>{{ order.content }}</pre>{% endif %}
 {% endblock %}
