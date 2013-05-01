@@ -36,7 +36,12 @@ class BaseFormView(TemplateView):
             return HttpResponse(response)
 
         order = self._save_data(params)
-        return HttpResponse('<html><head><title>Suksess!</title></head><body><p>Bestillingen har blitt sendt.<br/>card_id = {}</p></body></html>'.format(order.id))
+        template = get_template('form_success.html')
+        context_data = {
+            'url' : self._get_order_url(request, order),
+        }
+        response = template.render(Context(context_data))
+        return HttpResponse(response)
 
     def _get_errors(self, params):
         return {
@@ -46,6 +51,9 @@ class BaseFormView(TemplateView):
             'contact_email_error' : params['contact_email'] == '',
             'contact_number_error' : False,
         }
+
+    def _get_order_url(self, request, order):
+        raise NotImplementedError
 
     def _save_data(self, params):
         raise NotImplementedError

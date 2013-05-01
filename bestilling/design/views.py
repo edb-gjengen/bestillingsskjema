@@ -41,6 +41,9 @@ class DesignFormView(BaseFormView):
         # Filter out all errors that are False:
         return dict((error, True) for error, has_happened in errors.iteritems() if has_happened is True)
 
+    def _get_order_url(self, request, order):
+        return request.build_absolute_uri('/design/order/{uuid}/'.format(uuid=order.uuid))
+
     def _save_data(self, params):
         format_type = params['format'] if params['format'] != 'other' else params['format_other']
         paper_size = params['paper_size'] if params['paper_size'] != 'other' else params['paper_size_other']
@@ -84,5 +87,4 @@ class DesignOrderView(BaseOrderView):
     template_name = "design/order.html"
 
     def _get_order(self, order_id):
-        return DesignOrder.objects.get(pk=order_id)
-
+        return DesignOrder.objects.get(uuid=order_id)

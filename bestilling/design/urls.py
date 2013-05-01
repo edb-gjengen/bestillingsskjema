@@ -3,5 +3,5 @@ from design.views import DesignFormView, DesignOrderView
 
 urlpatterns = patterns('design.views',
     (r'^$', DesignFormView.as_view()),
-    (r'^order/(?P<order_id>\d+)/', DesignOrderView.as_view()),
+    (r'^order/(?P<order_id>[a-zA-Z0-9-]+)/', DesignOrderView.as_view()),
 )

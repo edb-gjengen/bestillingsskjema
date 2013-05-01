@@ -1,0 +1,21 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Kommunikasjonsavdelingen - Bestillingen er sendt</title>
+		{% load staticfiles %}
+		<link type="text/css" href="{% static 'css/jquery.ui.css' %}" rel="stylesheet" />	
+		<link type="text/css" href="{% static 'css/jquery.ui.datepicker.css' %}" rel="stylesheet" />	
+		<link type="text/css" href="{% static 'css/bootstrap.css' %}" rel="stylesheet" />	
+		<link type="text/css" href="{% static 'css/bootstrap-responsive.css' %}" rel="stylesheet" />	
+		<link type="text/css" href="{% static 'css/design/style.css' %}" rel="stylesheet" />	
+		<script type="text/javascript" src="{% static 'js/jquery-2.0.0.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.ui.core.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.ui.datepicker.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+	</head>
+	<body class="center">
+		<h1 class="text-center" style="margin:30px;">Bestillingen er sendt!</h1>
+
+		<p>Du kan alltid se aktuell status for bestillingen din under f&oslash;lgende lenke (tips: det kan v&aelig;re en god id&eacute; &aring; lagre den): <br /><a href="{{ url }}">{{ url }}</a></p>
+	</body>
+</html>
