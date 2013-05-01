@@ -95,8 +95,3 @@ class DesignOrderView(BaseOrderView):
         except DesignOrder.DoesNotExist:
             raise Http404
 
-    def _get_additional_data(self, order):
-        card = self._get_from_trello(order.trello_card_id)
-        card.fetch()
-        return self._get_data_from_card(card)
-        

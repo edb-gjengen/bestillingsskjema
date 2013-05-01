@@ -5,7 +5,7 @@ from django.template import Context
 from django.template.loader import get_template
 from django.views.generic import TemplateView
 from settings import TRELLO_API_KEY, TRELLO_TOKEN
-import trello
+from lib import trello
 
 class BaseFormView(TemplateView):
     template_name = None
@@ -88,7 +88,10 @@ class BaseOrderView(TemplateView):
         raise NotImplementedError
 
     def _get_additional_data(self, order):
-        raise NotImplementedError
+        card = self._get_from_trello(order.trello_card_id)
+        card.fetch()
+        return self._get_data_from_card(card)
+ 
 
     def _get_from_trello(self, card_id):
         client = trello.TrelloClient(api_key=TRELLO_API_KEY, token=TRELLO_TOKEN)
