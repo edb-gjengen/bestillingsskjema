@@ -1,0 +1,26 @@
+{% extends "order_base.html" %}
+
+{% block title %}Kommunikasjonsavdelingen - Tekstoppdrag nr {{ order.id }}{% endblock %}
+
+{% block order_details %}
+<table class="table table-bordered">
+	<caption>Bestilling</caption>
+	<thead>
+		<tr>
+			<th>Type tekst</th>
+			<th>Lengde</th>
+			<th>Bilde</th>
+			<th>Intervju</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>{{ order.text_type }}</td>
+			<td>{{ order.length }}</td>
+			<td>{{ order.image }}</td>
+			<td>{% if interview_name %}{{ order.interview_name }}{% else %}Nei{% endif %}</td>
+		</tr>
+	</tbody>
+</table>
+<pre>{{ order.content }}</pre>
+{% endblock %}
