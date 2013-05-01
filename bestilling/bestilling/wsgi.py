@@ -13,7 +13,16 @@ middleware here, or combine a Django application with an application of another
 framework.
 
 """
-import os
+import os, sys
+
+from os.path import dirname, join
+
+def map_path(target_name=''):
+    return join(dirname(__file__), target_name).replace('\\', '/')
+
+path = map_path("..")
+if path not in sys.path:
+    sys.path.append(path)
 
 # We defer to a DJANGO_SETTINGS_MODULE already in the environment. This breaks
 # if running multiple sites in the same mod_wsgi process. To fix this, use
