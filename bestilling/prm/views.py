@@ -10,6 +10,7 @@ from django.template import Context
 from django.template.loader import get_template
 
 class PrmFormView(BaseFormView):
+    template_name = "prm/form.html"
     trello_board_id = '5181797902c4ab210d002449'
     params_list = [
         'client',
