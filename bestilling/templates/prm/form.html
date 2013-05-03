@@ -1,40 +1,42 @@
-<div class="formitem">
-	<legend>Hva trenger du?</legend>
-	{% if errors.assignment_type_error %}
-		<label class="text-error">Feltet er obligatorisk.</label>
-	{% endif %}
-
-	<label class="radio">
-		<input name="assignment_type" type="radio" value="Hjelp til planlegging av promo" {% if assignment_type = 'Hjelp til planlegging av promo' %} checked="checked" {% endif %}>Hjelp til planlegging av promo</input>
-	</label>
-	<label class="radio">
-		<input name="assignment_type" type="radio" value="Planlegge distribusjon/kommunikasjon utad" {% if assignment_type = 'Planlegge distribusjon/kommunikasjon utad' %} checked="checked" {% endif %}>Planlegge distribusjon/kommunikasjon utad</input>
-	</label>
-	<label class="radio">
-		<input name="assignment_type" type="radio" value="Møte vedrørende markedsføringsstrategi (målgruppe, kanaler, budskap, osv)" {% if assignment_type = 'Møte vedrørende markedsføringsstrategi (målgruppe, kanaler, budskap, osv)' %} checked="checked" {% endif %}>Møte vedrørende markedsføringsstrategi (målgruppe, kanaler, budskap, osv)</input>
-	</label>
-	<label class="radio">
-		<input name="assignment_type" type="radio" value="Planlegge søknader for støtte av HS/Admin/CNS eller eksternt" {% if assignment_type = 'Planlegge søknader for støtte av HS/Admin/CNS eller eksternt' %} checked="checked" {% endif %}>Planlegge søknader for støtte av HS/Admin/CNS eller eksternt</input>
-	</label>
-	<label class="radio">
-		<input name="assignment_type" type="radio" value="other" {% if assignment_type = 'other' %} checked="checked" {% endif %}>Annet: 
-		</input>
-	</label>
-	<input type="text" name="assignment_type_other" value="{{ assignment_type_other }}" style="margin-left:20px;" />
-	{% if errors.assignment_type_other_error %}
-		<label class="text-error" style="margin-left:20px;">Feltet er obligatorisk hvis du velger "annet".</label>
-	{% endif %}
-</div>
-<div class="formitem">
-	<legend>Innhold</legend>
-	<div class="desc">
-		<p>Hvem, hva, hvor og når</p>
-		<p>Oppdragsgiver er pliktet til å forsyne oppdragstaker med tilstrekkelig og korrekt informasjon. Det er heller ikke oppdragstakers oppgave å sørge for at oppgitt informasjon/data er korrekt, og er følgelig fraskrevet alt ansvar dersom informasjonen er ukorrekt.</p>
-		<p>Bestillingen skal inneha en klar og tydelig formulering.</p>
-		<p>Oppdragstaker er pliktet til å ta kontakt med oppdragsgiver så fort bestillingen er tildelt den.</p>
+<div id="prmform" class="nav-content">
+	<div class="formitem">
+		<legend>Hva trenger du?</legend>
+		{% if errors.assignment_type_error %}
+			<label class="text-error">Feltet er obligatorisk.</label>
+		{% endif %}
+	
+		<label class="radio">
+			<input name="assignment_type" type="radio" value="Hjelp til planlegging av promo" {% if assignment_type = 'Hjelp til planlegging av promo' %} checked="checked" {% endif %}>Hjelp til planlegging av promo</input>
+		</label>
+		<label class="radio">
+			<input name="assignment_type" type="radio" value="Planlegge distribusjon/kommunikasjon utad" {% if assignment_type = 'Planlegge distribusjon/kommunikasjon utad' %} checked="checked" {% endif %}>Planlegge distribusjon/kommunikasjon utad</input>
+		</label>
+		<label class="radio">
+			<input name="assignment_type" type="radio" value="Møte vedrørende markedsføringsstrategi (målgruppe, kanaler, budskap, osv)" {% if assignment_type = 'Møte vedrørende markedsføringsstrategi (målgruppe, kanaler, budskap, osv)' %} checked="checked" {% endif %}>Møte vedrørende markedsføringsstrategi (målgruppe, kanaler, budskap, osv)</input>
+		</label>
+		<label class="radio">
+			<input name="assignment_type" type="radio" value="Planlegge søknader for støtte av HS/Admin/CNS eller eksternt" {% if assignment_type = 'Planlegge søknader for støtte av HS/Admin/CNS eller eksternt' %} checked="checked" {% endif %}>Planlegge søknader for støtte av HS/Admin/CNS eller eksternt</input>
+		</label>
+		<label class="radio">
+			<input name="assignment_type" type="radio" value="other" {% if assignment_type = 'other' %} checked="checked" {% endif %}>Annet: 
+			</input>
+		</label>
+		<input type="text" name="assignment_type_other" value="{{ assignment_type_other }}" style="margin-left:20px;" />
+		{% if errors.assignment_type_other_error %}
+			<label class="text-error" style="margin-left:20px;">Feltet er obligatorisk hvis du velger "annet".</label>
+		{% endif %}
 	</div>
-	{% if errors.content_error %}
-		<label class="text-error">Feltet er obligatorisk.</label>
-	{% endif %}
-	<textarea name="content">{{ content }}</textarea>
+	<div class="formitem">
+		<legend>Innhold</legend>
+		<div class="desc">
+			<p>Hvem, hva, hvor og når</p>
+			<p>Oppdragsgiver er pliktet til å forsyne oppdragstaker med tilstrekkelig og korrekt informasjon. Det er heller ikke oppdragstakers oppgave å sørge for at oppgitt informasjon/data er korrekt, og er følgelig fraskrevet alt ansvar dersom informasjonen er ukorrekt.</p>
+			<p>Bestillingen skal inneha en klar og tydelig formulering.</p>
+			<p>Oppdragstaker er pliktet til å ta kontakt med oppdragsgiver så fort bestillingen er tildelt den.</p>
+		</div>
+		{% if errors.content_error %}
+			<label class="text-error">Feltet er obligatorisk.</label>
+		{% endif %}
+		<textarea name="content">{{ content }}</textarea>
+	</div>
 </div>
