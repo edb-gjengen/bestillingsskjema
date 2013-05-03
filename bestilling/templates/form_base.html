@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 	<head>
-		<title>{% block title %}{% endblock %}</title>
+		<title>Bestillingsskjema for KAK</title>
 		{% load staticfiles %}
 		<link type="text/css" href="{% static 'css/jquery.ui.css' %}" rel="stylesheet" />	
 		<link type="text/css" href="{% static 'css/jquery.ui.datepicker.css' %}" rel="stylesheet" />	
@@ -22,7 +22,7 @@
 			  						defaultDate: new Date("{{ deadline }}") });
 			});
 		</script>
-		<h3 style="margin-left:15px;">{% block header %}{% endblock %}</h3>
+		<h3 style="margin-left:15px;">Bestillingsskjema for KAK</h3>
 		
 		<form method="post" action="." method="post" id="bestilling">{% csrf_token %}
 		
@@ -78,7 +78,9 @@
 				</div>
 			</div>
 		
-			{% block order_details %}{% endblock %}
+			{% include "design/form.html" %}
+			{% include "tekst/form.html" %}
+			{% include "prm/form.html" %}
 
 			<div class="submit">
 				<input class="btn" type="submit" value="Send bestilling" name="bestill" style="margin-left:20px;margin-top:5px;" />

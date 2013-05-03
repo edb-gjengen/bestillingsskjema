@@ -1,8 +1,3 @@
-{% extends "form_base.html" %}
-
-{% block title %}Kommunikasjonsavdelingen - Bestilling designoppdrag{% endblock %}
-{% block header %}Kommunikasjonsavdelingen - Bestilling designoppdrag{% endblock %}
-{% block order_details %}
 <div class="formitem">
 	<legend>Format</legend>
 	{% if errors.format_error %}
@@ -108,4 +103,3 @@
 	{% endif %}
 	<textarea name="content">{{ content }}</textarea>
 </div>
-{% endblock %}

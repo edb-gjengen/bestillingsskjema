@@ -1,8 +1,3 @@
-{% extends "form_base.html" %}
-
-{% block title %}Kommunikasjonsavdelingen - Bestilling PRM-oppdrag{% endblock %}
-{% block header %}Kommunikasjonsavdelingen - Bestilling PRM-oppdrag{% endblock %}
-{% block order_details %}
 <div class="formitem">
 	<legend>Hva trenger du?</legend>
 	{% if errors.assignment_type_error %}
@@ -43,4 +38,3 @@
 	{% endif %}
 	<textarea name="content">{{ content }}</textarea>
 </div>
-{% endblock %}

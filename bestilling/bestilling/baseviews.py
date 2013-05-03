@@ -11,7 +11,7 @@ from lib import trello
 import utils
 
 class BaseFormView(TemplateView):
-    template_name = None
+    template_name = "form_base.html"
     trello_board_id = None
     params_list = None
 
