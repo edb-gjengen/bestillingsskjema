@@ -1,11 +1,16 @@
-textarea
-{
-	width:99%;
-	height:250px;
+.page-header h1 {
+	background: url('/static/img/kak-logo-x40.png') no-repeat;
+	text-indent: 100px;
 }
 
 .affix {
 	top:40px;
+}
+
+textarea
+{
+	width:99%;
+	height:250px;
 }
 
 div.formitem
