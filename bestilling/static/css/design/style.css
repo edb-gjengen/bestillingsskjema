@@ -1,13 +1,11 @@
-body.center
-{
-	margin:auto;
-	width:800px;
-}
-
 textarea
 {
 	width:99%;
 	height:250px;
+}
+
+.affix {
+	top:40px;
 }
 
 div.formitem
