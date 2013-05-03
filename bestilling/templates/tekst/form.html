@@ -1,97 +1,99 @@
-<div class="formitem">
-	<legend>Type tekst</legend>
-	{% if errors.text_type_error %}
-		<label class="text-error">Feltet er obligatorisk.</label>
-	{% endif %}
-
-	<label class="radio">
-		<input name="text_type" type="radio" value="Stemningsrapport fra arrangement" {% if text_type = 'Stemningsrapport fra arrangement' %} checked="checked" {% endif %}>Stemningsrapport fra arrangement</input>
-	</label>
-	<label class="radio">
-		<input name="text_type" type="radio" value="Sak til nettsiden i forkant av arrangement" {% if text_type = 'Sak til nettsiden i forkant av arrangement' %} checked="checked" {% endif %}>Sak til nettsiden i forkant av arrangement</input>
-	</label>
-	<label class="radio">
-		<input name="text_type" type="radio" value="Sak til nettsiden om en forening e.l" {% if text_type = 'Sak til nettsiden om en forening e.l' %} checked="checked" {% endif %}>Sak til nettsiden om en forening e.l</input>
-	</label>
-	<label class="radio">
-		<input name="text_type" type="radio" value="Tekst til plakat/brosjyre" {% if text_type = 'Tekst til plakat/brosjyre' %} checked="checked" {% endif %}>Tekst til plakat/brosjyre</input>
-	</label>
-	<label class="radio">
-		<input name="text_type" type="radio" value="Korrekturlesing" {% if text_type = 'Korrekturlesing' %} checked="checked" {% endif %}>Korrekturlesing</input>
-	</label>
-	<label class="radio">
-		<input name="text_type" type="radio" value="other" {% if text_type = 'other' %} checked="checked" {% endif %}>Annet: 
-		</input>
-	</label>
-	<input type="text" name="text_type_other" value="{{ text_type_other }}" style="margin-left:20px;" />
-	{% if errors.text_type_other_error %}
-		<label class="text-error" style="margin-left:20px;">Feltet er obligatorisk hvis du velger "annet".</label>
-	{% endif %}
-</div>
-
-<div class="formitem">
-	<legend>Lengde</legend>
-	{% if errors.length_error %}
-		<label class="text-error">Feltet er obligatorisk.</label>
-	{% endif %}
-
-	<label class="radio">
-		<input name="length" type="radio" value="Statusoppdatering" {% if length = 'Statusoppdatering' %} checked="checked" {% endif %}>Statusoppdatering</input>
-	</label>
-	<label class="radio">
-		<input name="length" type="radio" value="1-3 avsnitt" {% if length = '1-3 avsnitt' %} checked="checked" {% endif %}>1-3 avsnitt</input>
-	</label>
-	<label class="radio">
-		<input name="length" type="radio" value="1-2 sider" {% if length = '1-2 sider' %} checked="checked" {% endif %}>1-2 sider</input>
-	</label>
-	<label class="radio">
-		<input name="length" type="radio" value="Mer enn 2 sider" {% if length = 'Mer enn 2 sider' %} checked="checked" {% endif %}>Mer enn 2 sider</input>
-	</label>
-</div>
-
-<div class="formitem">
-	<legend>Bilde</legend>
-	{% if errors.image_error %}
-		<label class="text-error">Feltet er obligatorisk.</label>
-	{% endif %}
+<div id="tekstform" class="nav-content">
+	<div class="formitem">
+		<legend>Type tekst</legend>
+		{% if errors.text_type_error %}
+			<label class="text-error">Feltet er obligatorisk.</label>
+		{% endif %}
 	
-	<label class="radio">
-		<input name="image" type="radio" value="Ingen" {% if image = 'Ingen' %} checked="checked" {% endif %}>Ingen</input>
-	</label>
-	<label class="radio">
-		<input name="image" type="radio" value="Skaffer selv" {% if image = 'Skaffer selv' %} checked="checked" {% endif %}>Skaffer selv</input>
-	</label>
-	<label class="radio">
-		<input name="image" type="radio" value="Skribentersamfundet skaffer det" {% if image = 'Skribentersamfundet skaffer det' %} checked="checked" {% endif %}>Skribentersamfundet skaffer det</input>
-	</label>
-</div>
-
-<div class="formitem form-horizontal">
-	<legend>Intervju</legend>
-	{% if errors.interview_error %}
-		<label class="text-error">Feltene er obligatoriske.</label>
-	{% endif %}
-	<div class="control-group">
-		<label for="interview_name">Navn:</label>
-		<input type="text" name="interview_name" value="{{ interview_name }}" />
+		<label class="radio">
+			<input name="text_type" type="radio" value="Stemningsrapport fra arrangement" {% if text_type = 'Stemningsrapport fra arrangement' %} checked="checked" {% endif %}>Stemningsrapport fra arrangement</input>
+		</label>
+		<label class="radio">
+			<input name="text_type" type="radio" value="Sak til nettsiden i forkant av arrangement" {% if text_type = 'Sak til nettsiden i forkant av arrangement' %} checked="checked" {% endif %}>Sak til nettsiden i forkant av arrangement</input>
+		</label>
+		<label class="radio">
+			<input name="text_type" type="radio" value="Sak til nettsiden om en forening e.l" {% if text_type = 'Sak til nettsiden om en forening e.l' %} checked="checked" {% endif %}>Sak til nettsiden om en forening e.l</input>
+		</label>
+		<label class="radio">
+			<input name="text_type" type="radio" value="Tekst til plakat/brosjyre" {% if text_type = 'Tekst til plakat/brosjyre' %} checked="checked" {% endif %}>Tekst til plakat/brosjyre</input>
+		</label>
+		<label class="radio">
+			<input name="text_type" type="radio" value="Korrekturlesing" {% if text_type = 'Korrekturlesing' %} checked="checked" {% endif %}>Korrekturlesing</input>
+		</label>
+		<label class="radio">
+			<input name="text_type" type="radio" value="other" {% if text_type = 'other' %} checked="checked" {% endif %}>Annet: 
+			</input>
+		</label>
+		<input type="text" name="text_type_other" value="{{ text_type_other }}" style="margin-left:20px;" />
+		{% if errors.text_type_other_error %}
+			<label class="text-error" style="margin-left:20px;">Feltet er obligatorisk hvis du velger "annet".</label>
+		{% endif %}
 	</div>
-
-	<div class="control-group">
-		<label for="interview_contact">Kontaktinfo (telefon, epost, m&oslash;tested):</label>
-		<textarea type="text" name="interview_contact" value="{{ interview_contact }}"></textarea>
+	
+	<div class="formitem">
+		<legend>Lengde</legend>
+		{% if errors.length_error %}
+			<label class="text-error">Feltet er obligatorisk.</label>
+		{% endif %}
+	
+		<label class="radio">
+			<input name="length" type="radio" value="Statusoppdatering" {% if length = 'Statusoppdatering' %} checked="checked" {% endif %}>Statusoppdatering</input>
+		</label>
+		<label class="radio">
+			<input name="length" type="radio" value="1-3 avsnitt" {% if length = '1-3 avsnitt' %} checked="checked" {% endif %}>1-3 avsnitt</input>
+		</label>
+		<label class="radio">
+			<input name="length" type="radio" value="1-2 sider" {% if length = '1-2 sider' %} checked="checked" {% endif %}>1-2 sider</input>
+		</label>
+		<label class="radio">
+			<input name="length" type="radio" value="Mer enn 2 sider" {% if length = 'Mer enn 2 sider' %} checked="checked" {% endif %}>Mer enn 2 sider</input>
+		</label>
 	</div>
-</div>
-
-<div class="formitem">
-	<legend>Innhold</legend>
-	<div class="desc">
-		<p>Hvem, hva, hvor og når</p>
-		<p>Oppdragsgiver er pliktet til å forsyne oppdragstaker med tilstrekkelig og korrekt informasjon. Det er heller ikke oppdragstakers oppgave å sørge for at oppgitt informasjon/data er korrekt, og er følgelig fraskrevet alt ansvar dersom informasjonen er ukorrekt.</p>
-		<p>Bestillingen skal inneha en klar og tydelig formulering.</p>
-		<p>Oppdragstaker er pliktet til å ta kontakt med oppdragsgiver så fort bestillingen er tildelt den.</p>
+	
+	<div class="formitem">
+		<legend>Bilde</legend>
+		{% if errors.image_error %}
+			<label class="text-error">Feltet er obligatorisk.</label>
+		{% endif %}
+		
+		<label class="radio">
+			<input name="image" type="radio" value="Ingen" {% if image = 'Ingen' %} checked="checked" {% endif %}>Ingen</input>
+		</label>
+		<label class="radio">
+			<input name="image" type="radio" value="Skaffer selv" {% if image = 'Skaffer selv' %} checked="checked" {% endif %}>Skaffer selv</input>
+		</label>
+		<label class="radio">
+			<input name="image" type="radio" value="Skribentersamfundet skaffer det" {% if image = 'Skribentersamfundet skaffer det' %} checked="checked" {% endif %}>Skribentersamfundet skaffer det</input>
+		</label>
 	</div>
-	{% if errors.content_error %}
-		<label class="text-error">Feltet er obligatorisk.</label>
-	{% endif %}
-	<textarea name="content">{{ content }}</textarea>
+	
+	<div class="formitem form-horizontal">
+		<legend>Intervju</legend>
+		{% if errors.interview_error %}
+			<label class="text-error">Feltene er obligatoriske.</label>
+		{% endif %}
+		<div class="control-group">
+			<label for="interview_name">Navn:</label>
+			<input type="text" name="interview_name" value="{{ interview_name }}" />
+		</div>
+	
+		<div class="control-group">
+			<label for="interview_contact">Kontaktinfo (telefon, epost, m&oslash;tested):</label>
+			<textarea type="text" name="interview_contact" value="{{ interview_contact }}"></textarea>
+		</div>
+	</div>
+	
+	<div class="formitem">
+		<legend>Innhold</legend>
+		<div class="desc">
+			<p>Hvem, hva, hvor og når</p>
+			<p>Oppdragsgiver er pliktet til å forsyne oppdragstaker med tilstrekkelig og korrekt informasjon. Det er heller ikke oppdragstakers oppgave å sørge for at oppgitt informasjon/data er korrekt, og er følgelig fraskrevet alt ansvar dersom informasjonen er ukorrekt.</p>
+			<p>Bestillingen skal inneha en klar og tydelig formulering.</p>
+			<p>Oppdragstaker er pliktet til å ta kontakt med oppdragsgiver så fort bestillingen er tildelt den.</p>
+		</div>
+		{% if errors.content_error %}
+			<label class="text-error">Feltet er obligatorisk.</label>
+		{% endif %}
+		<textarea name="content">{{ content }}</textarea>
+	</div>
 </div>

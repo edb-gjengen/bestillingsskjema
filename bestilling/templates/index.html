@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 	<head>
-		<title>Kommunikasjonsavdelingen Bestill oppdrag</title>
+		<title>Bestillingsskjema for KAK</title>
 		{% load staticfiles %}
 		<link type="text/css" href="{% static 'css/jquery.ui.css' %}" rel="stylesheet" />	
 		<link type="text/css" href="{% static 'css/jquery.ui.datepicker.css' %}" rel="stylesheet" />	
@@ -12,27 +12,80 @@
 		<script type="text/javascript" src="{% static 'js/jquery.ui.core.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/jquery.ui.datepicker.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
-		<style>
-			body {
-				padding: 15px;
-			}
-
-			li {
-				margin-bottom: 5px;
-			}
-
-			li a {
-				font-size: 1.2em;
-			}
-		</style>
 	</head>
-	<body>
-		<h3>Den bedste bestilling blir gjort p&aring; <a href='http://bestilling.studentersamfundet.no'>bestilling</a>.</h3>
+	<body class="center">
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#deadline").datepicker({altField: '#deadline_field',
+			  						altFormat: 'yy-mm-dd',
+			  						minDate: '+2w',
+			  						defaultDate: new Date("{{ deadline }}") });
+			});
+		</script>
+		<h3 style="margin-left:15px;">Bestillingsskjema for KAK</h3>
 		
-		<ul>
-			<li><a href='design'>Design</a></li>
-			<li><a href='tekst'>Tekst</a></li>
-			<li><a href='prm'>PRM</a></li>
-		</ul>
+		<form method="post" action="." method="post" id="bestilling">{% csrf_token %}
+			<div id="contactform" class="nav-content">
+				<div class="formitem">
+					<legend>Forening</legend>
+					<label>Hvem bestiller?</label>
+					<input type="text" name="client" value="{{ client }}" />
+					{% if errors.client_error %}
+						<label class="text-error">Feltet er obligatorisk.</label>
+					{% endif %}
+				</div>
+		
+				<div class="formitem">
+					<legend>Frist</legend>
+					<div class="desc">
+						<p>Fristen må være tidligst to uker etter bestilling.</p>
+						<p>Tidsfristen for oppdraget skal være forsvarlig i henhold til estimert arbeidsmengde. Dersom bestillingen er et hastoppdrag, må det gjerne presiseres, men Kommunikasjonsavdelingen kan ikke garantere at bestillingen prioriteres fremfor øvrige oppdrag.</p>
+					</div>
+					<input id = "deadline_field" style="display:none;" value="" name="deadline" />
+					<div id="deadline"></div>
+				</div>
+				<div class="formitem">
+					<legend>Kontaktperson</legend>
+				
+					<div class="form-horizontal">
+						<div class="control-group">
+							<label class="control-label" for="contact_name">Navn:</label>
+							<div class="controls">
+								<input type="text" name="contact_name" value="{{ contact_name }}" />
+								{% if errors.contact_name_error %}
+									<label class="text-error">Feltet er obligatorisk.</label>
+								{% endif %}
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="contact_email">Email:</label>
+							<div class="controls">
+								<input type="text" name="contact_email" value="{{ contact_email }}" />
+								{% if errors.contact_email_error %}
+									<label class="text-error">Skriv inn gyldig epost-adresse.</label>
+								{% endif %}
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="contact_number">Tlf.:</label>
+							<div class="controls">
+								<input type="text" name="contact_number" value="{{ contact_number }}" />
+								{% if errors.contact_number_error %}
+									<label class="text-error">Skriv inn gyldig telefonnummer.</label>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			{% include "design/form.html" %}
+			{% include "tekst/form.html" %}
+			{% include "prm/form.html" %}
+
+			<div class="submit">
+				<input class="btn" type="submit" value="Send bestilling" name="bestill" style="margin-left:20px;margin-top:5px;" />
+			</div>
+		</form>
 	</body>
 </html>
