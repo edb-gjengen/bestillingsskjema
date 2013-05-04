@@ -13,11 +13,6 @@ class TekstFormView(BaseFormView):
     template_name = 'tekst/form.html'
     trello_board_id = '5181797902c4ab210d002449'
     params_list = [
-        'client',
-        'deadline',
-        'contact_name',
-        'contact_email',
-        'contact_number',
         'text_type',
         'text_type_other',
         'length',

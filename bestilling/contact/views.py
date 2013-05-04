@@ -10,6 +10,13 @@ from django.template.loader import get_template
 
 class ContactFormView(BaseFormView):
     template_name = "contact/form.html"
+    params_list = [
+        'client',
+        'deadline',
+        'contact_name',
+        'contact_email',
+        'contact_number',
+    ]
 
     def _get_errors(self, params):
         errors = {
