@@ -37,6 +37,9 @@ class BaseFormView(TemplateView):
             response = template.render(Context(context_data))
             return HttpResponse(response)
 
+        if request.POST.get('validate', '0') == '1':
+            return HttpResponse("")
+
         order = self._save_data(request, params)
         template = get_template('form_success.html')
         context_data = {
@@ -46,13 +49,7 @@ class BaseFormView(TemplateView):
         return HttpResponse(response)
 
     def _get_errors(self, params):
-        return {
-            'client_error' : params['client'] == '',
-            'deadline_error' : params['deadline'] == '',
-            'contact_name_error' : params['contact_name'] == '',
-            'contact_email_error' : not utils.is_email_valid(params['contact_email']),
-            'contact_number_error' : not utils.is_phone_valid(params['contact_number']),
-        }
+        raise NotImplementedError
 
     def _get_order_url(self, request, order):
         raise NotImplementedError
