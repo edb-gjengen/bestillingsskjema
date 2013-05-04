@@ -34,6 +34,22 @@
 				{% include "navigation.html" %}
 				
 				<form class="span9" method="post" action="." method="post" id="bestilling">{% csrf_token %}
+
+					<div class="formitem">
+						<fieldset id="service-picker" class="nav-content">
+							<legend>Hva vil du ha?</legend>
+							<label class="checkbox">
+							      <input id="designpls" type="checkbox" />Design
+							</label>
+							<label class="checkbox">
+							      <input id="prmpls" type="checkbox" />Markedsføring
+							</label>
+							<label class="checkbox">
+							      <input id="textpls" type="checkbox" />Tekst
+							</label>
+						</fieldset><!-- #service-picker -->
+					</div>
+
 					{% include "contact/form.html" %}
 					{% include "design/form.html" %}
 					{% include "tekst/form.html" %}

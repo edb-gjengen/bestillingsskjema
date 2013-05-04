@@ -13,10 +13,10 @@ textarea
 	height:250px;
 }
 
-div.formitem
+.formitem
 {
 	padding:10px;
-	margin:5px;
+	margin:0 0 30px;
 	border:1px solid #ddd;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
