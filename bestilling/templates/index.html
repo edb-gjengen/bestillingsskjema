@@ -12,6 +12,7 @@
 		<script type="text/javascript" src="{% static 'js/jquery.ui.core.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/jquery.ui.datepicker.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/added-fanciness.js' %}"></script>
 	</head>
 	<body class="center">
 		<script type="text/javascript">
@@ -35,32 +36,43 @@
 				
 				<form class="span9" method="post" action="." method="post" id="bestilling">{% csrf_token %}
 
-					<div class="formitem">
-						<fieldset id="service-picker" class="nav-content">
-							<legend>Hva vil du ha?</legend>
-							<label class="checkbox">
-							      <input id="designpls" type="checkbox" />Design
-							</label>
-							<label class="checkbox">
-							      <input id="prmpls" type="checkbox" />Markedsføring
-							</label>
-							<label class="checkbox">
-							      <input id="textpls" type="checkbox" />Tekst
-							</label>
+					<div id="service-picker" class="formitem">
+						<fieldset class="nav-content">
+							<legend>Hva trenger du?</legend>
+							<div class="btn-group">
+								<a id="tekst-btn" rel="tekst" class="btn btn-large" href="#">
+									<i class="icon-pencil"></i> Tekst
+								</a>
+								<a id="design-btn" rel="design" class="btn btn-large" href="#">
+									<i class="icon-picture"></i> Design
+								</a>
+								<a id="prm-btn" rel="prm" class="btn btn-large" href="#">
+									<i class="icon-heart"></i> Markedsføring
+								</a>
+							</div>
+							<input id="tekstpls" name="tekstpls" type="hidden" value="0" />
+							<input id="designpls" name="designpls" type="hidden" value="0" />
+							<input id="prmpls" name="prmpls" type="hidden" value="0" />
 						</fieldset><!-- #service-picker -->
 					</div>
 
 					{% include "contact/form.html" %}
-					{% include "design/form.html" %}
 					{% include "tekst/form.html" %}
+					{% include "design/form.html" %}
 					{% include "prm/form.html" %}
 
-					<div class="submit">
-						<input class="btn" type="submit" value="Send bestilling" name="bestill" style="margin-left:20px;margin-top:5px;" />
+					<div id="plsplspls" class="submit">
+						<input class="btn btn-large btn-success" type="submit" value="Send bestilling" name="bestill" style="margin-left:20px;margin-top:5px;" disabled />
 					</div>
 				</form>
 
 			</div><!-- .row-fluid -->
 		</div><!-- .container -->
+		<div id="footer"> 
+			<div class="container">
+				foo.
+			</div><!-- #footer -->
+		</div><!-- #footer -->
+
 	</body>
 </html>

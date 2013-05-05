@@ -1,5 +1,6 @@
-<div id="tekstform" class="nav-content">
-	<div class="formitem">
+<div id="tekstform" class="nav-content service formitem">
+	<h2>Tekst</h2>
+	<fieldset>
 		<legend>Type tekst</legend>
 		{% if errors.text_type_error %}
 			<label class="text-error">Feltet er obligatorisk.</label>
@@ -28,9 +29,9 @@
 		{% if errors.text_type_other_error %}
 			<label class="text-error" style="margin-left:20px;">Feltet er obligatorisk hvis du velger "annet".</label>
 		{% endif %}
-	</div>
+	</fieldset>
 	
-	<div class="formitem">
+	<fieldset>
 		<legend>Lengde</legend>
 		{% if errors.length_error %}
 			<label class="text-error">Feltet er obligatorisk.</label>
@@ -48,9 +49,9 @@
 		<label class="radio">
 			<input name="length" type="radio" value="Mer enn 2 sider" {% if length = 'Mer enn 2 sider' %} checked="checked" {% endif %}>Mer enn 2 sider</input>
 		</label>
-	</div>
+	</fieldset>
 	
-	<div class="formitem">
+	<fieldset>
 		<legend>Bilde</legend>
 		{% if errors.image_error %}
 			<label class="text-error">Feltet er obligatorisk.</label>
@@ -65,25 +66,27 @@
 		<label class="radio">
 			<input name="image" type="radio" value="Skribentersamfundet skaffer det" {% if image = 'Skribentersamfundet skaffer det' %} checked="checked" {% endif %}>Skribentersamfundet skaffer det</input>
 		</label>
-	</div>
+	<fieldset>
 	
-	<div class="formitem form-horizontal">
+	<fieldset>
 		<legend>Intervju</legend>
-		{% if errors.interview_error %}
-			<label class="text-error">Feltene er obligatoriske.</label>
-		{% endif %}
-		<div class="control-group">
-			<label for="interview_name">Navn:</label>
-			<input type="text" name="interview_name" value="{{ interview_name }}" />
+		<div class="form-horizontal">
+			{% if errors.interview_error %}
+				<label class="text-error">Feltene er obligatoriske.</label>
+			{% endif %}
+			<div class="control-group">
+				<label for="interview_name">Navn:</label>
+				<input type="text" name="interview_name" value="{{ interview_name }}" />
+			</div>
+		
+			<div class="control-group">
+				<label for="interview_contact">Kontaktinfo (telefon, epost, m&oslash;tested):</label>
+				<textarea type="text" name="interview_contact" value="{{ interview_contact }}"></textarea>
+			</div>
 		</div>
+	</fieldset>
 	
-		<div class="control-group">
-			<label for="interview_contact">Kontaktinfo (telefon, epost, m&oslash;tested):</label>
-			<textarea type="text" name="interview_contact" value="{{ interview_contact }}"></textarea>
-		</div>
-	</div>
-	
-	<div class="formitem">
+	<fieldset>
 		<legend>Innhold</legend>
 		<div class="desc">
 			<p>Hvem, hva, hvor og når</p>
@@ -95,5 +98,5 @@
 			<label class="text-error">Feltet er obligatorisk.</label>
 		{% endif %}
 		<textarea name="content">{{ content }}</textarea>
-	</div>
+	</fieldset>
 </div>

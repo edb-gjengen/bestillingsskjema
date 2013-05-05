@@ -1,10 +1,11 @@
-<div id="prmform" class="nav-content">
-	<div class="formitem">
+<div id="prmform" class="nav-content service formitem">
+	<h2>PR og markedsføring</h2>
+	<fieldset>
 		<legend>Hva trenger du?</legend>
 		{% if errors.assignment_type_error %}
 			<label class="text-error">Feltet er obligatorisk.</label>
 		{% endif %}
-	
+
 		<label class="radio">
 			<input name="assignment_type" type="radio" value="Hjelp til planlegging av promo" {% if assignment_type = 'Hjelp til planlegging av promo' %} checked="checked" {% endif %}>Hjelp til planlegging av promo</input>
 		</label>
@@ -25,8 +26,9 @@
 		{% if errors.assignment_type_other_error %}
 			<label class="text-error" style="margin-left:20px;">Feltet er obligatorisk hvis du velger "annet".</label>
 		{% endif %}
-	</div>
-	<div class="formitem">
+	</fieldset>
+
+	<fieldset>
 		<legend>Innhold</legend>
 		<div class="desc">
 			<p>Hvem, hva, hvor og når</p>
@@ -38,5 +40,5 @@
 			<label class="text-error">Feltet er obligatorisk.</label>
 		{% endif %}
 		<textarea name="content">{{ content }}</textarea>
-	</div>
+	</fieldset>
 </div>

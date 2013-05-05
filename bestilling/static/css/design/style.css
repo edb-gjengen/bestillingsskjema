@@ -1,10 +1,35 @@
+/**
+ * Header
+ */
 .page-header h1 {
 	background: url('/static/img/kak-logo-x40.png') no-repeat;
 	text-indent: 100px;
 }
 
+/**
+ * Navigation
+ */
+#progress-list {
+	list-style-type:decimal;
+	list-style-position:inside;
+}
+#progress-list li {
+	padding:0 5px;
+}
+#progress-list #unknown-nav-element {
+	margin-top:0.5em
+}
+
 .affix {
 	top:40px;
+}
+
+/**
+ * Main Content
+ */
+
+.btn-large [class^="icon-"], .btn-large [class*=" icon-"] {
+	margin-top: 2px;
 }
 
 textarea
@@ -16,11 +41,15 @@ textarea
 .formitem
 {
 	padding:10px;
-	margin:0 0 30px;
+	margin:0 0 45px;
 	border:1px solid #ddd;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
+}
+.formitem#service-picker,
+.formitem.chosen {
+	display:block;
 }
 
 .form-horizontal .control-label {
@@ -29,4 +58,14 @@ textarea
 
 .form-horizontal .controls {
 	margin-left:80px;
+}
+
+/**
+ * Footer
+ */
+#footer {
+	background:rgb(245,245,245);
+	border-top:1px solid lightgray;
+	padding:50px 0;
+
 }

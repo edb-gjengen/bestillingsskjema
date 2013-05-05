@@ -1,53 +1,50 @@
-<div id="contactform" class="nav-content">
-	<div class="formitem">
-		<legend>Forening</legend>
-		<label>Hvem bestiller?</label>
-		<input type="text" name="client" value="{{ client }}" />
-		{% if errors.client_error %}
-		<label class="text-error">Feltet er obligatorisk.</label>
-		{% endif %}
-	</div>
-
-	<div class="formitem">
-		<legend>Frist</legend>
-		<div class="desc">
-			<p>Fristen må være tidligst to uker etter bestilling.</p>
-			<p>Tidsfristen for oppdraget skal være forsvarlig i henhold til estimert arbeidsmengde. Dersom bestillingen er et hastoppdrag, må det gjerne presiseres, men Kommunikasjonsavdelingen kan ikke garantere at bestillingen prioriteres fremfor øvrige oppdrag.</p>
-		</div>
-		<input id = "deadline_field" style="display:none;" value="" name="deadline" />
-		<div id="deadline"></div>
-	</div>
-	<div class="formitem">
-		<legend>Kontaktperson</legend>
-
-		<div class="form-horizontal">
-			<div class="control-group">
-				<label class="control-label" for="contact_name">Navn:</label>
-				<div class="controls">
-					<input type="text" name="contact_name" value="{{ contact_name }}" />
-					{% if errors.contact_name_error %}
-					<label class="text-error">Feltet er obligatorisk.</label>
-					{% endif %}
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label" for="contact_email">Email:</label>
-				<div class="controls">
-					<input type="text" name="contact_email" value="{{ contact_email }}" />
-					{% if errors.contact_email_error %}
-					<label class="text-error">Skriv inn gyldig epost-adresse.</label>
-					{% endif %}
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label" for="contact_number">Tlf.:</label>
-				<div class="controls">
-					<input type="text" name="contact_number" value="{{ contact_number }}" />
-					{% if errors.contact_number_error %}
-					<label class="text-error">Skriv inn gyldig telefonnummer.</label>
-					{% endif %}
-				</div>
+<div id="contactform" class="nav-content formitem">
+	<legend>Kontaktinfo</legend>
+	<div class="form-horizontal">
+		<div class="control-group">
+			<label class="control-label" for="client">Forening:</label>
+			<div class="controls">
+				<input type="text" name="client" value="{{ client }}" />
+				{% if errors.client_error %}
+				<label class="text-error">Feltet er obligatorisk.</label>
+				{% endif %}
 			</div>
 		</div>
+
+		<div class="control-group">
+			<label class="control-label" for="contact_name">Navn:</label>
+			<div class="controls">
+				<input type="text" name="contact_name" value="{{ contact_name }}" />
+				{% if errors.contact_name_error %}
+				<label class="text-error">Feltet er obligatorisk.</label>
+				{% endif %}
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="contact_email">Email:</label>
+			<div class="controls">
+				<input type="text" name="contact_email" value="{{ contact_email }}" />
+				{% if errors.contact_email_error %}
+				<label class="text-error">Skriv inn gyldig epost-adresse.</label>
+				{% endif %}
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="contact_number">Tlf.:</label>
+			<div class="controls">
+				<input type="text" name="contact_number" value="{{ contact_number }}" />
+				{% if errors.contact_number_error %}
+				<label class="text-error">Skriv inn gyldig telefonnummer.</label>
+				{% endif %}
+			</div>
+		</div>
+	</div><!-- .form-horizontal -->
+
+	<legend>Frist</legend>
+	<div class="desc">
+		<p>Fristen må være tidligst to uker etter bestilling.</p>
+		<p>Tidsfristen for oppdraget skal være forsvarlig i henhold til estimert arbeidsmengde. Dersom bestillingen er et hasteoppdrag, må det gjerne presiseres, men Kommunikasjonsavdelingen kan ikke garantere at bestillingen prioriteres fremfor øvrige oppdrag.</p>
 	</div>
-</div>
+	<input id = "deadline_field" style="display:none;" value="" name="deadline" />
+	<div id="deadline"></div>
+</div><!-- #contactform.formitem -->
