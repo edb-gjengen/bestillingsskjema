@@ -1,17 +1,18 @@
 #-*- encoding: utf-8 -*-
 
-from datetime import datetime
 
+from bestilling import settings
 from bestilling.baseviews import BaseFormView, BaseOrderView
-from tekst.models import TekstOrder
+from datetime import datetime
 from django.core.context_processors import csrf
 from django.http import HttpResponse, Http404
 from django.template import Context
 from django.template.loader import get_template
+from tekst.models import TekstOrder
 
 class TekstFormView(BaseFormView):
     template_name = 'tekst/form.html'
-    trello_board_id = '5181797902c4ab210d002449'
+    trello_board_id = settings.TRELLO_TEKST_BOARD_ID
     params_list = [
         'client',
         'deadline',

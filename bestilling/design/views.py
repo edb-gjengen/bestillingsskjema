@@ -1,17 +1,18 @@
 #-*- encoding: utf-8 -*-
 
-from datetime import datetime
-
+from bestilling import settings
 from bestilling.baseviews import BaseFormView, BaseOrderView
+from datetime import datetime
 from design.models import DesignOrder
 from django.core.context_processors import csrf
 from django.http import HttpResponse, Http404
 from django.template import Context, Template
 from django.template.loader import get_template
 
+
 class DesignFormView(BaseFormView):
     template_name = 'design/form.html'
-    trello_board_id = '5181797902c4ab210d002449'
+    trello_board_id = settings.TRELLO_DESIGN_BOARD_ID
     params_list = [
         'client',
         'deadline',

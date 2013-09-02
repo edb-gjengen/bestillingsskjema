@@ -25,9 +25,12 @@ DATABASES = {
     }
 }
 
+# Trello keys, tokens and board ids
 TRELLO_API_KEY = "" #TODO
 TRELLO_TOKEN = "" #TODO
-
+TRELLO_DESIGN_BOARD_ID = "" #TODO
+TRELLO_TEKST_BOARD_ID = "" #TODO
+TRELLO_PRM_BOARD_ID = "" #TODO
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
