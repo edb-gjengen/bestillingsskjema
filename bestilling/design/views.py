@@ -11,7 +11,7 @@ from django.template.loader import get_template
 
 
 class DesignFormView(BaseFormView):
-    template_name = 'design/form.html'
+    form_template_name = 'design/form.html'
     trello_board_id = settings.TRELLO_DESIGN_BOARD_ID
     params_list = [
         'client',

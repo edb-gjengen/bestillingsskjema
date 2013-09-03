@@ -1,0 +1,1 @@
+Takk for din bestilling! Du kan alltid finne den igjen under følgende lenke: {{ url }}

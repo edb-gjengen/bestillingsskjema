@@ -11,7 +11,7 @@ from django.template.loader import get_template
 from prm.models import PrmOrder
 
 class PrmFormView(BaseFormView):
-    template_name = 'prm/form.html'
+    form_template_name = 'prm/form.html'
     trello_board_id = settings.TRELLO_PRM_BOARD_ID
     params_list = [
         'client',

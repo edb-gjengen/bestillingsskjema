@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from django.core.context_processors import csrf
+from django.core import mail
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, Http404
 from django.template import Context
@@ -11,12 +12,13 @@ from lib import trello
 import utils
 
 class BaseFormView(TemplateView):
-    template_name = None
+    mail_template_name = "confirmation_mail.txt"
+    form_template_name = None
     trello_board_id = None
     params_list = None
 
     def get(self, request):
-        template = get_template(self.template_name)
+        template = get_template(self.form_template_name)
         context_data = {}
         context_data.update(csrf(request))
     
@@ -29,7 +31,7 @@ class BaseFormView(TemplateView):
     
         # If there were errors in parsing form (missing parameters etc.):
         if errors is not None and len(errors) > 0:
-            template = get_template(self.template_name)
+            template = get_template(self.form_template_name)
             context_data = params.copy()
             context_data['errors'] = errors
             context_data.update(csrf(request))
@@ -38,6 +40,8 @@ class BaseFormView(TemplateView):
             return HttpResponse(response)
 
         order = self._save_data(request, params)
+        self._send_confirmation_mail(request, order)
+
         template = get_template('form_success.html')
         context_data = {
             'url' : self._get_order_url(request, order),
@@ -80,6 +84,21 @@ class BaseFormView(TemplateView):
         # Set colour of the card. We have to do this like this, because there is no shortcut and _set_remote_attribute() uses PUT
         card.client.fetch_json('/cards/'+card.id+'/labels', http_method="POST", post_args = { 'value' : card_colour })
         return card
+
+    def _send_confirmation_mail(self, request, order):
+        template = get_template(self.mail_template_name)
+        context_data = {
+            'order' : order,
+            'url' : self._get_order_url(request, order),
+        }
+
+        mail_from = "noreply@studentersamfundet.no"
+        mail_to = order.contact_email
+        mail_subject = "{id}: Bestillingen din er mottatt.".format(id=order.client)
+        mail_content = template.render(Context(context_data))
+
+        mail.send_mail(mail_subject, mail_content, mail_from, [ mail_to ], fail_silently=True)
+
 
 class BaseOrderView(TemplateView):
     template_name = None
@@ -149,3 +168,4 @@ class BaseOrderView(TemplateView):
             card.fetch()
 
         return map(lambda member_id: client.get_member(member_id).fetch(), card.member_ids)
+

@@ -11,7 +11,7 @@ from django.template.loader import get_template
 from tekst.models import TekstOrder
 
 class TekstFormView(BaseFormView):
-    template_name = 'tekst/form.html'
+    form_template_name = 'tekst/form.html'
     trello_board_id = settings.TRELLO_TEKST_BOARD_ID
     params_list = [
         'client',
