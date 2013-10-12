@@ -13,6 +13,7 @@ from tekst.models import TekstOrder
 class TekstFormView(BaseFormView):
     form_template_name = 'tekst/form.html'
     trello_board_id = settings.TRELLO_TEKST_BOARD_ID
+    mail_from = settings.MAIL_KAK_TEKST
     params_list = [
         'client',
         'deadline',

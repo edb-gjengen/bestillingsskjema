@@ -13,6 +13,7 @@ from django.template.loader import get_template
 class DesignFormView(BaseFormView):
     form_template_name = 'design/form.html'
     trello_board_id = settings.TRELLO_DESIGN_BOARD_ID
+    mail_from = settings.MAIL_KAK_DESIGN
     params_list = [
         'client',
         'deadline',

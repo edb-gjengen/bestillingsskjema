@@ -13,6 +13,7 @@ import utils
 
 class BaseFormView(TemplateView):
     mail_template_name = "confirmation_mail.txt"
+    mail_from = 'no-reply@studentersamfundet.no'
     form_template_name = None
     trello_board_id = None
     params_list = None
@@ -92,7 +93,7 @@ class BaseFormView(TemplateView):
             'url' : self._get_order_url(request, order),
         }
 
-        mail_from = "noreply@studentersamfundet.no"
+        mail_from = self.mail_from
         mail_to = order.contact_email
         mail_subject = "{id}: Bestillingen din er mottatt.".format(id=order.client)
         mail_content = template.render(Context(context_data))

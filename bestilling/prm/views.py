@@ -13,6 +13,7 @@ from prm.models import PrmOrder
 class PrmFormView(BaseFormView):
     form_template_name = 'prm/form.html'
     trello_board_id = settings.TRELLO_PRM_BOARD_ID
+    mail_from = settings.MAIL_KAK_PRM
     params_list = [
         'client',
         'deadline',
