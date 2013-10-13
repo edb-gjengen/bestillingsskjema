@@ -168,3 +168,7 @@ LOGGING = {
         },
     }
 }
+
+MAIL_KAK_DESIGN = 'kak-design@studentersamfundet.no'
+MAIL_KAK_TEKST = 'kak-tekst@studentersamfundet.no'
+MAIL_KAK_PRM = 'kak-prm@studentersamfundet.no'
