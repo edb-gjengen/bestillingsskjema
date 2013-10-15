@@ -1,7 +1,7 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html>
 	<head>
-		<title>Kommunikasjonsavdelingen Bestill oppdrag</title>
+		<title>Kommunikasjonsavdelingen: Bestill oppdrag</title>
 		{% load staticfiles %}
 		<link type="text/css" href="{% static 'css/jquery.ui.css' %}" rel="stylesheet" />	
 		<link type="text/css" href="{% static 'css/jquery.ui.datepicker.css' %}" rel="stylesheet" />	
@@ -24,15 +24,31 @@
 			li a {
 				font-size: 1.2em;
 			}
+            .btn-container img {
+                max-height: 30px;
+                max-width: 60px;
+                padding-right: 10px;
+            }
+            .btn-container a {
+                line-height: 30px;
+            }
 		</style>
 	</head>
 	<body>
-		<h3>Den bedste bestilling blir gjort p&aring; <a href='http://bestilling.studentersamfundet.no'>bestilling</a>.</h3>
-		
-		<ul>
-			<li><a href='design'>Design</a></li>
-			<li><a href='tekst'>Tekst</a></li>
-			<li><a href='prm'>PRM</a></li>
-		</ul>
+        <div class="row-fluid">
+            <div class="span12">
+                <h3>Bestill oppdrag fra Kommunikasjonsavdelingen</h3>
+                <div class="btn-container">
+                    <a href='design' class="btn btn-large"><img src="{% static 'img/design.png' %}" /> Bestill designoppdrag</a> <a href='tekst' class="btn btn-large"><img src="{% static 'img/tekst.png' %}" /> Bestill tekstoppdrag</a> <a href='prm' class="btn btn-large"><img src="{% static 'img/prm.png' %}" /> Bestill PRM-oppdrag</a><br /><br />
+                </div>
+                <em> - Den bedste bestilling blir gjort p&aring; <a href='http://bestilling.studentersamfundet.no'>bestilling</a>.</em><br /><br />
+
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <a href="http://kak.neuf.no"><img src="{% static 'img/kak_logo.png' %}" alt="Kommunikasjonsavdelingen" /></a>
+            </div>
+        </div>
 	</body>
 </html>
