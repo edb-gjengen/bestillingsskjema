@@ -1,12 +1,12 @@
 **Fra:** {{ client }}
 **Navn:** {{ contact_name }}
 **Epost:** {{ contact_email }}
-**Tlf:** {{ contact_number}}
+**Tlf:** {{ contact_number }}
 ---
-{%	if format_type %}**Format:** {{ format_type }}\n{% endif %}
+{%	if format_type %}**Format:** {{ format_type }}{% endif %}
 {%	if paper_size %}**Papirstr.:** {{ paper_size }}{% endif %}
-{%	if colour %}**Farger:** {{ colour}}{% endif %}
-{%	if marger %}**Marger:** {{ marger}}{% endif %}
+{%	if colour %}**Farger:** {{ colour }}{% endif %}
+{%	if marger %}**Marger:** {{ marger }}{% endif %}
 {% 	if text_type %}**Type tekst:** {{ text_type }}{% endif %}
 {% 	if length %}**Lengde:** {{ length }}{% endif %}
 {% 	if image %}**Bilde:** {{ image }}{% endif %}
