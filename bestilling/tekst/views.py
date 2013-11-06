@@ -32,10 +32,11 @@ class TekstFormView(BaseFormView):
     def _get_errors(self, params):
         errors = super(TekstFormView, self)._get_errors(params)
         errors.update({
-            'text_type_error' : params['text_type'] == '',
-            'text_type_other_error' : params['text_type'] == 'other' and params['text_type_other'] == '',
-            'length_error' : params['length'] == '',
-            'image_error' : params['image'] == '',
+            'text_type_error' : params['text_type'] == '' or len(params['text_type']) > 50,
+            'text_type_other_error' : params['text_type'] == 'other' and (params['text_type_other'] == '' or len(params['text_type_other']) > 50),
+            'length_error' : params['length'] == '' or len(params['length']) > 50,
+            'image_error' : params['image'] == '' or len(params['image']) > 50,
+            'interview_name_error' : len(params['interview_name']) > 20,
             'content_error' : False,
         })
     

@@ -31,7 +31,7 @@
 				<label>Hvem bestiller?</label>
 				<input type="text" name="client" value="{{ client }}" />
 				{% if errors.client_error %}
-					<label class="text-error">Feltet er obligatorisk.</label>
+					<label class="text-error">Feltet er obligatorisk og kan ikke ha mer enn 50 tegn.</label>
 				{% endif %}
 			</div>
 		
@@ -53,7 +53,7 @@
 						<div class="controls">
 							<input type="text" name="contact_name" value="{{ contact_name }}" />
 							{% if errors.contact_name_error %}
-								<label class="text-error">Feltet er obligatorisk.</label>
+								<label class="text-error">Feltet er obligatorisk og kan ikke har mer enn 50 tegn.</label>
 							{% endif %}
 						</div>
 					</div>

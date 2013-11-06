@@ -28,8 +28,8 @@ class PrmFormView(BaseFormView):
     def _get_errors(self, params):
         errors = super(PrmFormView, self)._get_errors(params)
         errors.update({
-            'assignment_type_error' : params['assignment_type'] == '',
-            'assignment_type_other_error' : params['assignment_type'] == 'other' and params['assignment_type_other'] == '',
+            'assignment_type_error' : params['assignment_type'] == '' or len(params['assignment_type']) > 50,
+            'assignment_type_other_error' : params['assignment_type'] == 'other' and (params['assignment_type_other'] == '' or len(params['assignment_type_other']) > 50),
             'content_error' : params['content'] == '',
         })
     

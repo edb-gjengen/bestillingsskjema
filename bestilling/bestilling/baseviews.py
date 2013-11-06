@@ -52,9 +52,9 @@ class BaseFormView(TemplateView):
 
     def _get_errors(self, params):
         return {
-            'client_error' : params['client'] == '',
+            'client_error' : params['client'] == '' or len(params['client']) > 50,
             'deadline_error' : params['deadline'] == '',
-            'contact_name_error' : params['contact_name'] == '',
+            'contact_name_error' : params['contact_name'] == '' or len(params['contact_name']) > 50,
             'contact_email_error' : not utils.is_email_valid(params['contact_email']),
             'contact_number_error' : not utils.is_phone_valid(params['contact_number']),
         }

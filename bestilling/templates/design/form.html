@@ -33,7 +33,7 @@
 	</label>
 	<input type="text" name="format_other" value="{{ format_other }}" style="margin-left:20px;" />
 	{% if errors.format_other_error %}
-		<label class="text-error" style="margin-left:20px;">Feltet er obligatorisk hvis du velger "annet".</label>
+		<label class="text-error" style="margin-left:20px;">Feltet er obligatorisk hvis du velger "annet". Innholdet kan ikke ha mer enn 50 tegn.</label>
 	{% endif %}
 </div>
 
@@ -62,7 +62,7 @@
 		<input name="paper_size" type="radio" value="other" {% if paper_size = 'other' %} checked="checked" {% endif %}>Annet:
 	</label>
 	{% if errors.paper_size_other_error %}
-		<label class="text-error" style="margin-left:20px;">Feltet er obligatorisk hvis du velger "annet".</label>
+		<label class="text-error" style="margin-left:20px;">Feltet er obligatorisk hvis du velger "annet". Innholdet kan ikke ha mer enn 50 tegn.</label>
 	{% endif %}
 	<input type="text" name="paper_size_other" value="{{ paper_size_other }}" style="margin-left:20px;" />
 </div>

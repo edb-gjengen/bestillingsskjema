@@ -30,7 +30,7 @@
 	</label>
 	<input type="text" name="text_type_other" value="{{ text_type_other }}" style="margin-left:20px;" />
 	{% if errors.text_type_other_error %}
-		<label class="text-error" style="margin-left:20px;">Feltet er obligatorisk hvis du velger "annet".</label>
+		<label class="text-error" style="margin-left:20px;">Feltet er obligatorisk hvis du velger "annet". Innholdet kan ikke ha mer enn 50 tegn.</label>
 	{% endif %}
 </div>
 
@@ -74,7 +74,7 @@
 <div class="formitem form-horizontal">
 	<legend>Intervju</legend>
 	{% if errors.interview_error %}
-		<label class="text-error">Feltene er obligatoriske.</label>
+		<label class="text-error">Feltene er obligatoriske. Navn kan ikke være lenger enn 20 tegn.</label>
 	{% endif %}
 	<div class="control-group">
 		<label for="interview_name">Navn:</label>

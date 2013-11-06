@@ -32,12 +32,12 @@ class DesignFormView(BaseFormView):
     def _get_errors(self, params):
         errors = super(DesignFormView, self)._get_errors(params)
         errors.update({
-            'format_error' : params['format'] == '',
-            'format_other_error' : params['format'] == 'other' and params['format_other'] == '',
-            'paper_size_error' : params['paper_size'] == '',
-            'paper_size_other_error' : params['paper_size'] == 'other' and params['paper_size_other'] == '',
-            'colour_error' : params['colour'] == '',
-            'marger_error' : params['marger'] == '',
+            'format_error' : params['format'] == '' or len(params['format']) > 50,
+            'format_other_error' : params['format'] == 'other' and (params['format_other'] == '' or len(params['format_other']) > 50),
+            'paper_size_error' : params['paper_size'] == '' or len(params['paper_size']) > 50,
+            'paper_size_other_error' : params['paper_size'] == 'other' and (params['paper_size_other'] == '' or len(params['paper_size_other']) > 50),
+            'colour_error' : params['colour'] == '' or len(params['colour']) > 50,
+            'marger_error' : params['marger'] == '' or len(params['marger']) > 50,
             'content_error' : False,
         })
     
