@@ -22,6 +22,12 @@
 		<input name="assignment_type" type="radio" value="Planlegge søknader for støtte av HS/Admin/CNS eller eksternt" {% if assignment_type = 'Planlegge søknader for støtte av HS/Admin/CNS eller eksternt' %} checked="checked" {% endif %}>Planlegge søknader for støtte av HS/Admin/CNS eller eksternt</input>
 	</label>
 	<label class="radio">
+		<input name="assignment_type" type="radio" value="Forespørsel om deling av Facebook-innhold gjennom DNS-siden" {% if assignment_type = 'Forespørsel om deling av Facebook-innhold gjennom DNS-siden' %} checked="checked" {% endif %}>Forespørsel om deling av Facebook-innhold gjennom DNS-siden</input>
+	</label>
+	<label class="radio">
+		<input name="assignment_type" type="radio" value="Opprette arrangement som DNS" {% if assignment_type = 'Opprette arrangement som DNS' %} checked="checked" {% endif %}>Opprette arrangement som DNS</input>
+	</label>
+	<label class="radio">
 		<input name="assignment_type" type="radio" value="other" {% if assignment_type = 'other' %} checked="checked" {% endif %}>Annet: 
 		</input>
 	</label>
@@ -36,6 +42,11 @@
 		<p>Hvem, hva, hvor og når</p>
 		<p>Oppdragsgiver er pliktet til å forsyne oppdragstaker med tilstrekkelig og korrekt informasjon. Det er heller ikke oppdragstakers oppgave å sørge for at oppgitt informasjon/data er korrekt, og er følgelig fraskrevet alt ansvar dersom informasjonen er ukorrekt.</p>
 		<p>Bestillingen skal inneha en klar og tydelig formulering.</p>
+		<label>For Facebook-innhold:</label>
+		<ul>
+			<li>Statuser - Tekstinnhold, link til ev. bilde i Drive eller Dropbx, link til ev. nettside eller arrangement som skal deles, osv</li>
+			<li>Arrangement - Arrangementsbeskrivelse, tidspunkt, sted, billettpris, link til coverbilde i Google Drive eller Dropbox.</li>
+		</ul>
 		<p>Oppdragstaker er pliktet til å ta kontakt med oppdragsgiver så fort bestillingen er tildelt den.</p>
 	</div>
 	{% if errors.content_error %}
