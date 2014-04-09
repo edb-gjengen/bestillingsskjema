@@ -29,6 +29,13 @@ class DesignFormView(BaseFormView):
         'content',
     ]
 
+    def _get_params(self):
+        params = super(DesignFormView, self)._get_params()
+        params.update({
+            'paper_sizes' : DesignOrder._meta.get_field('paper_size').choices
+        })
+        return params
+
     def _get_errors(self, params):
         errors = super(DesignFormView, self)._get_errors(params)
         errors.update({

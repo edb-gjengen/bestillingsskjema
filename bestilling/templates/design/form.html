@@ -43,27 +43,12 @@
 		<label class="text-error">Feltet er obligatorisk.</label>
 	{% endif %}
 
-	<label class="radio">
-		<input name="paper_size" type="radio" value="A1" {% if paper_size = 'A1' %} checked="checked" {% endif %}>A1 (594 x 841 mm)</input>
-	</label>
-	<label class="radio">
-		<input name="paper_size" type="radio" value="A2" {% if paper_size = 'A2' %} checked="checked" {% endif %}>A2 (420 x 594 mm)</input>
-	</label>
-	<label class="radio">
-		<input name="paper_size" type="radio" value="B3" {% if paper_size = 'B3' %} checked="checked" {% endif %}>B3 (353 x 500 mm)</input>
-	</label>
-	<label class="radio">
-		<input name="paper_size" type="radio" value="A3" {% if paper_size = 'A3' %} checked="checked" {% endif %}>A3 (297 x 420 mm)</input>
-	</label>
-	<label class="radio">
-		<input name="paper_size" type="radio" value="A4" {% if paper_size = 'A4' %} checked="checked" {% endif %}>A4 (210 x 297 mm)</input>
-	</label>
-	<label class="radio">
-		<input name="paper_size" type="radio" value="A5" {% if paper_size = 'A5' %} checked="checked" {% endif %}>A5 (148 x 210 mm)</input>
-	</label>
-	<label class="radio">
-		<input name="paper_size" type="radio" value="A6" {% if paper_size = 'A6' %} checked="checked" {% endif %}>A6 (105 x 148 mm)</input>
-	</label>
+	{% for paper_size_code, paper_size_display in paper_sizes %}
+		<label class="radio">
+			<input name="paper_size" type="radio" value="{{ paper_size_code }}" {% if paper_size = paper_size_code %} checked="checked" {% endif %}>{{ paper_size_display }}</input>
+		</label>
+	{% endfor %}
+
 	<label class="radio">
 		<input name="paper_size" type="radio" value="other" {% if paper_size = 'other' %} checked="checked" {% endif %}>Annet:
 	</label>

@@ -20,7 +20,7 @@ class BaseFormView(TemplateView):
 
     def get(self, request):
         template = get_template(self.form_template_name)
-        context_data = {}
+        context_data = self._get_params()
         context_data.update(csrf(request))
     
         response = template.render(Context(context_data))
@@ -34,6 +34,7 @@ class BaseFormView(TemplateView):
         if errors is not None and len(errors) > 0:
             template = get_template(self.form_template_name)
             context_data = params.copy()
+            context_data.update(self._get_params())
             context_data['errors'] = errors
             context_data.update(csrf(request))
     
@@ -49,6 +50,9 @@ class BaseFormView(TemplateView):
         }
         response = template.render(Context(context_data))
         return HttpResponse(response)
+
+    def _get_params(self):
+        return {}
 
     def _get_errors(self, params):
         return {
