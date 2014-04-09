@@ -9,27 +9,13 @@
 		<label class="text-error">Feltet er obligatorisk.</label>
 	{% endif %}
 
+	{% for format_type_code, format_type_display in format_types %}
 	<label class="radio">
-		<input name="format" type="radio" value="Trykk - Flyer" {% if format = 'Trykk - Flyer' %} checked="checked" {% endif %}>Trykk - Flyer</input>
+		<input name="format" type="radio" value="{{ format_type_code }}" {% if format = format_type_code %} checked="checked" {% endif %}>{{ format_type_display }}</input>
 	</label>
+	{% endfor %}
 	<label class="radio">
-		<input name="format" type="radio" value="Trykk - Plakat" {% if format = 'Trykk - Plakat' %} checked="checked" {% endif %}>Trykk - Plakat</input>
-	</label>
-	<label class="radio">
-		<input name="format" type="radio" value="Trykk - Banner" {% if format = 'Trykk - Banner' %} checked="checked" {% endif %}>Trykk - Banner</input>
-	</label>
-	<label class="radio">
-		<input name="format" type="radio" value="Web - Annonse" {% if format = 'Web - Annonse' %} checked="checked" {% endif %}>Web - Annonse</input>
-	</label>
-	<label class="radio">
-		<input name="format" type="radio" value="Web - Banner" {% if format = 'Web - Banner' %} checked="checked" {% endif %}>Web - Banner</input>
-	</label>
-	<label class="radio">
-		<input name="format" type="radio" value="Web - Bilde" {% if format = 'Web - Bilde' %} checked="checked" {% endif %}>Web - Bilde</input>
-	</label>
-	<label class="radio">
-		<input name="format" type="radio" value="other" {% if format = 'other' %} checked="checked" {% endif %}>Annet: 
-		</input>
+		<input name="format" type="radio" value="other" {% if format = 'other' %} checked="checked" {% endif %}>Annet:</input>
 	</label>
 	<input type="text" name="format_other" value="{{ format_other }}" style="margin-left:20px;" />
 	{% if errors.format_other_error %}

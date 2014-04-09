@@ -12,7 +12,16 @@ class DesignOrder(Order):
         ('A6', 'A6 (105 x 148 mm)'),
     ]
 
-    format_type = models.CharField(max_length=50)
+    FORMATS = [
+        ('Trykk - Flyer', 'Trykk - Flyer'),
+        ('Trykk - Plakat', 'Trykk - Plakat'),
+        ('Trykk - Banner', 'Trykk - Banner'),
+        ('Web - Annonse', 'Web - Annonse'),
+        ('Web - Banner', 'Web - Banner'),
+        ('Web - Bilde', 'Web - Bilde'),
+    ]
+
+    format_type = models.CharField(max_length=50, choices=FORMATS)
     paper_size = models.CharField(max_length=50, choices=PAPER_SIZES)
     colour = models.CharField(max_length=50)
     marger = models.CharField(max_length=50)

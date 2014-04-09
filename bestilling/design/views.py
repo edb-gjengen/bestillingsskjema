@@ -32,7 +32,8 @@ class DesignFormView(BaseFormView):
     def _get_params(self):
         params = super(DesignFormView, self)._get_params()
         params.update({
-            'paper_sizes' : DesignOrder._meta.get_field('paper_size').choices
+            'paper_sizes' : DesignOrder._meta.get_field('paper_size').choices,
+            'format_types' : DesignOrder._meta.get_field('format_type').choices,
         })
         return params
 
