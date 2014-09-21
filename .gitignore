@@ -1,4 +1,6 @@
 venv
+.idea
 *.pyc
 *.swp
+bestillingsskjema.db
 bestilling/bestilling/settings.py

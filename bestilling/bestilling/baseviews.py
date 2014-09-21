@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from datetime import datetime, timedelta
 from django.core.context_processors import csrf
 from django.core import mail
@@ -6,10 +7,13 @@ from django.http import HttpResponse, Http404
 from django.template import Context
 from django.template.loader import get_template
 from django.views.generic import TemplateView
-from settings import TRELLO_API_KEY, TRELLO_TOKEN
-from lib import trello
+
+from django.conf import settings
+
+import trello
 
 import utils
+
 
 class BaseFormView(TemplateView):
     mail_template_name = "confirmation_mail.txt"
@@ -46,7 +50,7 @@ class BaseFormView(TemplateView):
 
         template = get_template('form_success.html')
         context_data = {
-            'url' : self._get_order_url(request, order),
+            'url': self._get_order_url(request, order),
         }
         response = template.render(Context(context_data))
         return HttpResponse(response)
@@ -56,11 +60,11 @@ class BaseFormView(TemplateView):
 
     def _get_errors(self, params):
         return {
-            'client_error' : params['client'] == '' or len(params['client']) > 50,
-            'deadline_error' : params['deadline'] == '',
-            'contact_name_error' : params['contact_name'] == '' or len(params['contact_name']) > 50,
-            'contact_email_error' : not utils.is_email_valid(params['contact_email']),
-            'contact_number_error' : not utils.is_phone_valid(params['contact_number']),
+            'client_error': params['client'] == '' or len(params['client']) > 50,
+            'deadline_error': params['deadline'] == '',
+            'contact_name_error': params['contact_name'] == '' or len(params['contact_name']) > 50,
+            'contact_email_error': not utils.is_email_valid(params['contact_email']),
+            'contact_number_error': not utils.is_phone_valid(params['contact_number']),
         }
 
     def _get_order_url(self, request, order):
@@ -70,7 +74,7 @@ class BaseFormView(TemplateView):
         raise NotImplementedError
 
     def _save_to_trello(self, card_name, card_description, card_due, card_colour="green", list_name='Bestillinger'):
-        client = trello.TrelloClient(api_key=TRELLO_API_KEY, token=TRELLO_TOKEN)
+        client = trello.TrelloClient(api_key=settings.TRELLO_API_KEY, token=settings.TRELLO_TOKEN)
 
         board = client.get_board(self.trello_board_id)
 
@@ -86,15 +90,16 @@ class BaseFormView(TemplateView):
         # Set card deadline
         card._set_remote_attribute('due', card_due)
 
-        # Set colour of the card. We have to do this like this, because there is no shortcut and _set_remote_attribute() uses PUT
-        card.client.fetch_json('/cards/'+card.id+'/labels', http_method="POST", post_args = { 'value' : card_colour })
+        # Set colour of the card.
+        # Note: We have to do it like this, because there is no shortcut and _set_remote_attribute() uses PUT
+        card.client.fetch_json('/cards/'+card.id+'/labels', http_method="POST", post_args={'value': card_colour})
         return card
 
     def _send_confirmation_mail(self, request, order):
         template = get_template(self.mail_template_name)
         context_data = {
-            'order' : order,
-            'url' : self._get_order_url(request, order),
+            'order': order,
+            'url': self._get_order_url(request, order),
         }
 
         mail_from = self.mail_from
@@ -102,7 +107,7 @@ class BaseFormView(TemplateView):
         mail_subject = "{id}: Bestillingen din er mottatt.".format(id=order.client)
         mail_content = template.render(Context(context_data))
 
-        mail.send_mail(mail_subject, mail_content, mail_from, [ mail_to ], fail_silently=True)
+        mail.send_mail(mail_subject, mail_content, mail_from, [mail_to], fail_silently=True)
 
 
 class BaseOrderView(TemplateView):
@@ -113,12 +118,12 @@ class BaseOrderView(TemplateView):
             template = get_template(self.template_name)
             order = self._get_order(order_id)
             data = self._get_additional_data(order)
-        except (trello.ResourceUnavailable, ObjectDoesNotExist) as exception:
+        except (trello.ResourceUnavailable, ObjectDoesNotExist):
             raise Http404
 
         context_data = {
-            'order' : order,
-            'data' : data,
+            'order': order,
+            'data': data,
         }
     
         response = template.render(Context(context_data))
@@ -134,7 +139,7 @@ class BaseOrderView(TemplateView):
  
 
     def _get_from_trello(self, card_id):
-        client = trello.TrelloClient(api_key=TRELLO_API_KEY, token=TRELLO_TOKEN)
+        client = trello.TrelloClient(api_key=settings.TRELLO_API_KEY, token=settings.TRELLO_TOKEN)
 
         obj = client.fetch_json('/cards/' + card_id)
 
@@ -143,11 +148,7 @@ class BaseOrderView(TemplateView):
         tmp_list = MockObject()
         tmp_list.client = client
 
-        card = trello.Card(
-            card_id = obj['id'],
-            trello_list = tmp_list,
-            name = obj['name']
-        )
+        card = trello.Card.from_json(tmp_list, obj)
         return card
 
     def _get_data_from_card(self, card):
@@ -155,22 +156,21 @@ class BaseOrderView(TemplateView):
         days_left = None
         if card.badges['due'] is not None:
             now = datetime.now()
-            due =  datetime.strptime(card.badges['due'][:-5], "%Y-%m-%dT%H:%M:%S")
+            due = datetime.strptime(card.badges['due'][:-5], "%Y-%m-%dT%H:%M:%S")
             days_left = (due - now).days if due > now else timedelta(0).days
 
         return {
-            "card" : card,
-            "created" : card.create_date,
-            "due" : due,
-            "days_left" : days_left,
-            "members" : self._list_members_from_card(card),
+            "card": card,
+            "created": card.create_date,
+            "due": due,
+            "days_left": days_left,
+            "members": self._list_members_from_card(card),
         }
 
     def _list_members_from_card(self, card):
-        client = trello.TrelloClient(api_key=TRELLO_API_KEY, token=TRELLO_TOKEN)
+        client = trello.TrelloClient(api_key=settings.TRELLO_API_KEY, token=settings.TRELLO_TOKEN)
         
         if not hasattr(card, "member_ids"):
             card.fetch()
 
         return map(lambda member_id: client.get_member(member_id).fetch(), card.member_ids)
-
