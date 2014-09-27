@@ -86,7 +86,7 @@
             {% if attachments %}
                 <ul>
                 {% for a in attachments %}
-                    <li><a href="{{ a.uploaded_file.url }}">{{ a.uploaded_file.name }}</a> ({{ a.created }})</li>
+                    <li><a href="{{ a.uploaded_file.url }}">{{ a.uploaded_file.name|slice:"8:" }}</a> ({{ a.created }})</li>
                 {% endfor %}
                 </ul>
             {% endif %}

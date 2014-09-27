@@ -5,6 +5,7 @@ from django.contrib.contenttypes.models import ContentType
 
 from bestilling.utils import validate_file_extension
 
+
 class Attachment(models.Model):
     def limit_order_choices():
         q = models.Q(app_label='design', model='designorder') \
