@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 from datetime import datetime, timedelta
+from django.contrib.contenttypes.models import ContentType
 from django.core.context_processors import csrf
 from django.core import mail
 from django.core.exceptions import ObjectDoesNotExist
@@ -7,13 +8,12 @@ from django.http import HttpResponse, Http404
 from django.template import Context
 from django.template.loader import get_template
 from django.views.generic import TemplateView
-
 from django.conf import settings
-
 import trello
 
 import utils
 
+from bestilling.models import Attachment
 
 class BaseFormView(TemplateView):
     mail_template_name = "confirmation_mail.txt"
@@ -118,14 +118,19 @@ class BaseOrderView(TemplateView):
             template = get_template(self.template_name)
             order = self._get_order(order_id)
             data = self._get_additional_data(order)
+            content_type = ContentType.objects.get_for_model(order)
+            attachments = self._get_attachments(order, content_type)
         except (trello.ResourceUnavailable, ObjectDoesNotExist):
             raise Http404
 
         context_data = {
             'order': order,
             'data': data,
+            'content_type_id': content_type.pk,
+            'attachments': attachments
         }
-    
+        context_data.update(csrf(request))
+
         response = template.render(Context(context_data))
         return HttpResponse(response)
 
@@ -136,7 +141,11 @@ class BaseOrderView(TemplateView):
         card = self._get_from_trello(order.trello_card_id)
         card.fetch()
         return self._get_data_from_card(card)
- 
+
+    def _get_attachments(self, order, content_type):
+        return Attachment.objects.filter(
+            content_type=content_type.pk,
+            object_id=order.pk)
 
     def _get_from_trello(self, card_id):
         client = trello.TrelloClient(api_key=settings.TRELLO_API_KEY, token=settings.TRELLO_TOKEN)

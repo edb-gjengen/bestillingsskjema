@@ -4,3 +4,4 @@ venv
 *.swp
 bestillingsskjema.db
 bestilling/bestilling/settings.py
+uploads

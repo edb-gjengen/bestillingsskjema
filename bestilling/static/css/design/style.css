@@ -27,3 +27,19 @@ div.formitem
 .form-horizontal .controls {
 	margin-left:80px;
 }
+.attachments-caption {
+    margin-top: 20px;
+}
+.attachments {
+	border:1px solid #ddd;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+.attachments form {
+	padding-left: 8px;
+}
+#progress .bar {
+	text-align: center;
+	color: #a94442;
+}

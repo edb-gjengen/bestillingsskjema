@@ -12,6 +12,10 @@
 		<script type="text/javascript" src="{% static 'js/jquery.ui.core.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/jquery.ui.datepicker.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.ui.widget.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.iframe-transport.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.fileupload.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/attachments.js' %}"></script>
 	</head>
 	<body class="center">
 		<h1 class="text-center" style="margin:30px;">Bestilling fra {{ order.client }}</h1>
@@ -67,5 +71,26 @@
 		</table>
 	
 		{% block order_details %}{% endblock %}
+		{% block order_attachments %}
+        <div class="text-center attachments-caption">Vedlegg</div>
+        <div class="attachments">
+            <div id="progress">
+			    <div class="bar" style="width: 0%; background-color: #dff0d8;">&nbsp;</div>
+			</div>
+            <form action="{% url 'attachments' %}" id="fileupload-form">
+				{% csrf_token %}
+				<input type="hidden" name="content_type" value="{{ content_type_id }}">
+				<input type="hidden" name="object_id" value="{{ order.id }}">
+				<label for="fileupload">Last opp vedlegg: </label><input id="fileupload" type="file" name="uploaded_file" data-url="{% url 'attachments' %}">
+            </form>
+            {% if attachments %}
+                <ul>
+                {% for a in attachments %}
+                    <li><a href="{{ a.uploaded_file.url }}">{{ a.uploaded_file.name }}</a> ({{ a.created }})</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        {% endblock %}
 		</body>
 </html>
