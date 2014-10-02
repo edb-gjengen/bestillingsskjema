@@ -83,13 +83,11 @@
 				<input type="hidden" name="object_id" value="{{ order.id }}">
 				<label for="fileupload">Last opp vedlegg: </label><input id="fileupload" type="file" name="uploaded_file" data-url="{% url 'attachments' %}">
             </form>
-            {% if attachments %}
-                <ul>
-                {% for a in attachments %}
-                    <li><a href="{{ a.uploaded_file.url }}">{{ a.uploaded_file.name|slice:"8:" }}</a> ({{ a.created }})</li>
-                {% endfor %}
-                </ul>
-            {% endif %}
+            <ul>
+            {% for a in attachments %}
+                <li><a href="{{ a.uploaded_file.url }}">{{ a.uploaded_file.name|slice:"8:" }}</a> ({{ a.created }})</li>
+            {% endfor %}
+            </ul>
         </div>
         {% endblock %}
 		</body>
