@@ -5,3 +5,5 @@ venv
 db.sqlite3
 bestilling/local_settings.py
 uploads
+/media
+/staticfiles
