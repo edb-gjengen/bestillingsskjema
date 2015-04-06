@@ -1,11 +1,11 @@
-# Django settings for bestilling project. Fill out variables marked with TODO to make it work.
+# Copy and change variables marked with TODO to local_settings.py to make it work.
 import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 # Path of our project:
-PROJECT_PATH = os.path.realpath(os.path.join(os.path.dirname(__file__), os.pardir))
+BASE_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), os.pardir))
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -15,22 +15,17 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # TODO Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'bestillingsskjema',          # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
     }
 }
 
 # Trello keys, tokens and board ids
-TRELLO_API_KEY = "" #TODO
-TRELLO_TOKEN = "" #TODO
-TRELLO_DESIGN_BOARD_ID = "" #TODO
-TRELLO_TEKST_BOARD_ID = "" #TODO
-TRELLO_PRM_BOARD_ID = "" #TODO
+TRELLO_API_KEY = ""  # TODO
+TRELLO_TOKEN = ""  # TODO
+TRELLO_DESIGN_BOARD_ID = ""  # TODO
+TRELLO_TEKST_BOARD_ID = ""  # TODO
+TRELLO_PRM_BOARD_ID = ""  # TODO
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -72,7 +67,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -83,7 +78,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    PROJECT_PATH + '/static/',
+    os.path.join(BASE_DIR, 'static'),
 )
 
 # List of finder classes that know how to find static files in
@@ -91,7 +86,6 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -101,7 +95,6 @@ SECRET_KEY = ''
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -110,8 +103,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'bestilling.urls'
@@ -123,7 +114,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    PROJECT_PATH + '/templates/',
+    os.path.join(BASE_DIR, 'templates'),
 )
 
 INSTALLED_APPS = (
@@ -138,6 +129,7 @@ INSTALLED_APPS = (
     'design',
     'tekst',
     'prm',
+    'bestilling'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -176,3 +168,8 @@ MAIL_KAK_PRM = 'kak-prm@studentersamfundet.no'
 UPLOAD_FILENAME_EXTENSIONS_ALLOWED = [
     'png', 'ai', 'eps', 'jpeg', 'jpg', 'tif', 'tiff', 'indd', 'webp'
     'pdf', 'doc', 'docx', 'xls', 'xlsx', 'txt', 'zip']
+
+try:
+    from local_settings import *
+except ImportError:
+    pass

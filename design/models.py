@@ -26,4 +26,3 @@ class DesignOrder(Order):
     colour = models.CharField(max_length=50)
     marger = models.CharField(max_length=50)
     content = models.TextField(blank=True, null=True)
-

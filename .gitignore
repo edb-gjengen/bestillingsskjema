@@ -2,6 +2,6 @@ venv
 .idea
 *.pyc
 *.swp
-bestillingsskjema.db
-bestilling/bestilling/settings.py
+db.sqlite3
+bestilling/local_settings.py
 uploads

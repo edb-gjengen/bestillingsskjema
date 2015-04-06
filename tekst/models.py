@@ -1,6 +1,7 @@
 from bestilling.models import Order
 from django.db import models
 
+
 class TekstOrder(Order):
     text_type = models.CharField(max_length=50)
     length = models.CharField(max_length=50)

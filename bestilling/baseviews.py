@@ -11,7 +11,7 @@ from django.views.generic import TemplateView
 from django.conf import settings
 import trello
 
-import utils
+from bestilling import utils
 
 from bestilling.models import Attachment
 

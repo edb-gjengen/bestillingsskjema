@@ -4,9 +4,7 @@ from bestilling import settings
 from bestilling.baseviews import BaseFormView, BaseOrderView
 from datetime import datetime
 from design.models import DesignOrder
-from django.core.context_processors import csrf
-from django.http import HttpResponse, Http404
-from django.template import Context, Template
+from django.template import Context
 from django.template.loader import get_template
 
 
