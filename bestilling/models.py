@@ -5,6 +5,7 @@ from django.db import models
 from django.contrib.contenttypes.models import ContentType
 
 from bestilling.utils import validate_file_extension
+from django_extensions.db.fields import UUIDField
 
 
 class Attachment(models.Model):
@@ -23,8 +24,8 @@ class Attachment(models.Model):
 
 
 class Order(models.Model):
-    # uuid = UUIDField(unique=True, auto=True, version=1)  # version 1 guarantees no collisions
-    uuid = models.UUIDField(unique=True, default=uuid.uuid4)  # auto=True, version=1
+    uuid = UUIDField(unique=True, auto=True, version=1)  # version 1 guarantees no collisions
+    # uuid = models.UUIDField(unique=True, default=uuid.uuid4)  # auto=True, version=1
     client = models.CharField(max_length=50)
     deadline = models.DateField()
     contact_name = models.CharField(max_length=50)
