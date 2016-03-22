@@ -1,6 +1,7 @@
+import uuid
+
+from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
-from django_extensions.db.fields import UUIDField
-from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 
 from bestilling.utils import validate_file_extension
@@ -18,11 +19,12 @@ class Attachment(models.Model):
 
     content_type = models.ForeignKey(ContentType, limit_choices_to=_limit_order_choices)
     object_id = models.PositiveIntegerField()
-    order_object = generic.GenericForeignKey('content_type', 'object_id')
+    order_object = GenericForeignKey('content_type', 'object_id')
 
 
 class Order(models.Model):
-    uuid = UUIDField(unique=True, auto=True, version=1)  # version 1 guarantees no collisions
+    # uuid = UUIDField(unique=True, auto=True, version=1)  # version 1 guarantees no collisions
+    uuid = models.UUIDField(unique=True, default=uuid.uuid4)  # auto=True, version=1
     client = models.CharField(max_length=50)
     deadline = models.DateField()
     contact_name = models.CharField(max_length=50)

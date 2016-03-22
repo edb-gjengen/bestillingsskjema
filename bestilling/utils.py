@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import re
 from django.core.exceptions import ValidationError
 from django.conf import settings
@@ -19,4 +20,4 @@ def validate_file_extension(value):
         for ext in settings.UPLOAD_FILENAME_EXTENSIONS_ALLOWED:
             if value.name.lower().endswith(ext):
                 return  # bail out
-        raise ValidationError(u'Ikke tillatt filendelse i "{0}"'.format(value))
+        raise ValidationError('Ikke tillatt filendelse i "{0}"'.format(value))

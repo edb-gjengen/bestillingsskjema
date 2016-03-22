@@ -1,8 +1,7 @@
-from django.conf.urls import patterns
+from django.conf.urls import url
 from tekst.views import TekstFormView, TekstOrderView
 
-urlpatterns = patterns(
-    'tekst.views',
-    (r'^$', TekstFormView.as_view()),
-    (r'^order/(?P<order_id>[a-zA-Z0-9-]+)/', TekstOrderView.as_view()),
-)
+urlpatterns = [
+    url(r'^$', TekstFormView.as_view()),
+    url(r'^order/(?P<order_id>[a-zA-Z0-9-]+)/', TekstOrderView.as_view()),
+]

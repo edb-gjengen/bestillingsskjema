@@ -12,8 +12,8 @@ from django.conf import settings
 import trello
 
 from bestilling import utils
-
 from bestilling.models import Attachment
+
 
 class BaseFormView(TemplateView):
     mail_template_name = "confirmation_mail.txt"
@@ -79,7 +79,7 @@ class BaseFormView(TemplateView):
         board = client.get_board(self.trello_board_id)
 
         all_lists = board.all_lists()
-        order_list = filter(lambda x: x.name == list_name and (x.fetch() or x.closed == False), all_lists)
+        order_list = list(filter(lambda x: x.name.decode('utf-8') == list_name and (x.fetch() or x.closed is False), all_lists))
 
         if len(order_list) == 0:
             order_list.append(board.add_list(list_name))

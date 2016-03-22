@@ -1,6 +1,7 @@
 from bestilling.models import Order
 from django.db import models
 
+
 class DesignOrder(Order):
     PAPER_SIZES = [
         ('A1', 'A1 (594 x 841 mm)'),

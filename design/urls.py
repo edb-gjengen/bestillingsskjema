@@ -1,8 +1,8 @@
-from django.conf.urls import patterns
+from django.conf.urls import url
+
 from design.views import DesignFormView, DesignOrderView
 
-urlpatterns = patterns(
-    'design.views',
-    (r'^$', DesignFormView.as_view()),
-    (r'^order/(?P<order_id>[a-zA-Z0-9-]+)/', DesignOrderView.as_view()),
-)
+urlpatterns = [
+    url(r'^$', DesignFormView.as_view()),
+    url(r'^order/(?P<order_id>[a-zA-Z0-9-]+)/', DesignOrderView.as_view()),
+]

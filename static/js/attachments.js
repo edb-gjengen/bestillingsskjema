@@ -7,7 +7,7 @@ $(function () {
     	},
         dataType: 'json',
         done: function (e, data) {
-            $('.attachments ul').append('<li><a href="/media/' + data.result.uploaded_file + '">'+
+            $('.attachments ul').append('<li><a href="' + data.result.uploaded_file + '">'+
             	data.files[0].name + '</a> (ny)</li>');
 
             /* Reset progress */

@@ -1,7 +1,4 @@
 from django.conf import settings
-from django.http import HttpResponse
-from django.template import Context
-from django.template.loader import get_template
 from django.views.generic import TemplateView
 
 from rest_framework import generics
@@ -12,20 +9,15 @@ from bestilling.serializers import AttachmentSerializer
 
 
 class IndexView(TemplateView):
-    def get(self, request):
-        template = get_template('index.html')
-        context_data = {}
-    
-        response = template.render(Context(context_data))
-        return HttpResponse(response)
-    
+    template_name = 'index.html'
+
 
 class AttachmentView(generics.ListCreateAPIView):
     queryset = Attachment.objects.all()
     serializer_class = AttachmentSerializer
 
-    def post_save(self, obj, created=False):
-
+    def perform_create(self, serializer):
+        obj = serializer.save()
         if obj.order_object is not None:
             client = trello.TrelloClient(api_key=settings.TRELLO_API_KEY, token=settings.TRELLO_TOKEN)
             attachment = client.fetch_json(

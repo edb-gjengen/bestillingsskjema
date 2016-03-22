@@ -40,7 +40,7 @@ class TekstFormView(BaseFormView):
         })
     
         # Filter out all errors that are False:
-        return dict((error, True) for error, has_happened in errors.iteritems() if has_happened is True)
+        return dict((error, True) for error, has_happened in errors.items() if has_happened is True)
 
     def _get_order_url(self, request, order):
         return request.build_absolute_uri('/tekst/order/{uuid}/'.format(uuid=order.uuid))

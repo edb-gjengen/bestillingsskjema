@@ -1,20 +1,26 @@
 # -*- coding: utf-8 -*-
-from south.utils import datetime_utils as datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+from __future__ import unicode_literals
+
+from django.db import migrations, models
+import bestilling.utils
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
-        pass
+    dependencies = [
+        ('contenttypes', '0002_remove_content_type_name'),
+    ]
 
-    def backwards(self, orm):
-        pass
-
-    models = {
-        
-    }
-
-    complete_apps = ['bestilling']
+    operations = [
+        migrations.CreateModel(
+            name='Attachment',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
+                ('uploaded_file', models.FileField(validators=[bestilling.utils.validate_file_extension], upload_to='uploads')),
+                ('trello_id', models.CharField(null=True, max_length=40, blank=True)),
+                ('created', models.DateTimeField(auto_now_add=True)),
+                ('object_id', models.PositiveIntegerField()),
+                ('content_type', models.ForeignKey(to='contenttypes.ContentType')),
+            ],
+        ),
+    ]
